@@ -1,4 +1,4 @@
-package team.cs6365.payfive.ui;
+package team.cs6365.payfive.ui.admin;
 
 import team.cs6365.payfive.R;
 import android.app.Fragment;
@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 /**
  * Fragment that appears in the "content_frame", shows a planet
+ * 
+ * @author Jin
  */
 public class ManageAdminAcctFragment extends Fragment {
 	// public static final String ARG_PLANET_NUMBER = "planet_number";
@@ -17,9 +19,9 @@ public class ManageAdminAcctFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.frag_manage_admin_acct, container,
-				false);
-		
+		View rootView = inflater.inflate(R.layout.frag_manage_admin_acct,
+				container, false);
+
 		getActivity().setTitle("Manage Admin Account");
 		return rootView;
 	}

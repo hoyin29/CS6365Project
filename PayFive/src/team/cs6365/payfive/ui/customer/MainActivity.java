@@ -1,3 +1,14 @@
+/**
+ * @author Jinhyun Kim
+ * 
+ * MainActivity is the starting point of PayFive application and holds
+ * MenuListFragment, MenuItemFragment, ViewCartFragment, UpdateCartFragment,
+ * ManageMenuFragment, EditMenuItemFragment, ManageAdminAcctFragment.
+ * 
+ *  MainActivity uses navigation drawer sample projects for the menu and
+ *  switching fragments. The below is the license for the sample project.
+ */
+
 /*
  * Copyright 2013 The Android Open Source Project
  *
@@ -14,7 +25,7 @@
  * limitations under the License.
  */
 
-package team.cs6365.payfive.ui;
+package team.cs6365.payfive.ui.customer;
 
 import java.util.Locale;
 
@@ -25,7 +36,9 @@ import team.cs6365.payfive.R.id;
 import team.cs6365.payfive.R.layout;
 import team.cs6365.payfive.R.menu;
 import team.cs6365.payfive.R.string;
-
+import team.cs6365.payfive.ui.admin.AdminActivity;
+import team.cs6365.payfive.ui.admin.ManageAdminAcctFragment;
+import team.cs6365.payfive.ui.admin.ManageMenuFragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -93,8 +106,8 @@ public class MainActivity extends Activity {
 	// drawer menus
 	private final int DRAWER_MENU_LIST = 0;
 	private final int DRAWER_VIEW_CART = 1;
-	private final int DRAWER_MANAGE_MENU = 2;
-	private final int DRAWER_MANAGE_ADMIN_ACCT = 3;
+	private final int DRAWER_ADMIN_PANEL = 2;
+	private final int DRAWER_ABOUT = 3;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -219,17 +232,19 @@ public class MainActivity extends Activity {
 					.replace(R.id.content_frame, viewCartfragment).commit();
 			break;
 
-		case DRAWER_MANAGE_MENU:
-			Fragment manageMenuFragment = new ManageMenuFragment();
-			fragmentManager.beginTransaction()
-					.replace(R.id.content_frame, manageMenuFragment).commit();
+		case DRAWER_ADMIN_PANEL:
+			// Fragment manageMenuFragment = new ManageMenuFragment();
+			// fragmentManager.beginTransaction()
+			// .replace(R.id.content_frame, manageMenuFragment).commit();
+			Intent in = new Intent(this, AdminActivity.class);
+			startActivity(in);
+
 			break;
 
-		case DRAWER_MANAGE_ADMIN_ACCT:
-			Fragment manageAdminAcctFragment = new ManageAdminAcctFragment();
+		case DRAWER_ABOUT:
+			Fragment aboutFragment = new AboutFragment();
 			fragmentManager.beginTransaction()
-					.replace(R.id.content_frame, manageAdminAcctFragment)
-					.commit();
+					.replace(R.id.content_frame, aboutFragment).commit();
 			break;
 
 		default:
@@ -243,7 +258,8 @@ public class MainActivity extends Activity {
 
 		// update selected item and title, then close the drawer
 		mDrawerList.setItemChecked(position, true);
-		setTitle(mDrawerMenus[position]);
+		if (position != DRAWER_ADMIN_PANEL)
+			setTitle(mDrawerMenus[position]);
 		mDrawerLayout.closeDrawer(mDrawerList);
 	}
 

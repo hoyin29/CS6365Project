@@ -1,4 +1,4 @@
-package team.cs6365.payfive.ui;
+package team.cs6365.payfive.ui.customer;
 
 import team.cs6365.payfive.R;
 import android.app.Fragment;
@@ -9,7 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 /**
- * Fragment that appears in the "content_frame", shows a planet
+ * ViewCartFragment shows items currently in the cart for the current customer.
+ * Customers can go back to menu to shop or check out items in the cart.
+ * 
+ * @author Jin
  */
 public class ViewCartFragment extends Fragment {
 	// public static final String ARG_PLANET_NUMBER = "planet_number";
@@ -19,7 +22,7 @@ public class ViewCartFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.frag_view_cart, container,
 				false);
-		
+
 		getActivity().setTitle("View Cart");
 		return rootView;
 	}

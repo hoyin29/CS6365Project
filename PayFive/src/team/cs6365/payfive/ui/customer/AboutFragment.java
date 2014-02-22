@@ -1,4 +1,4 @@
-package team.cs6365.payfive.ui;
+package team.cs6365.payfive.ui.customer;
 
 import team.cs6365.payfive.R;
 import android.app.Fragment;
@@ -9,18 +9,20 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 /**
- * Fragment that appears in the "content_frame", shows a planet
+ * AboutFragment shows developer and version information
+ * 
+ * @author Jin
  */
-public class ManageMenuFragment extends Fragment {
+public class AboutFragment extends Fragment {
 	// public static final String ARG_PLANET_NUMBER = "planet_number";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.frag_manage_menu, container,
+		View rootView = inflater.inflate(R.layout.frag_about, container,
 				false);
-		
-		getActivity().setTitle("Manage Menu");
+
+		getActivity().setTitle("About");
 		return rootView;
 	}
 }
