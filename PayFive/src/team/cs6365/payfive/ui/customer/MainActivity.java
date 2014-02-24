@@ -233,9 +233,7 @@ public class MainActivity extends Activity {
 			break;
 
 		case DRAWER_ADMIN_PANEL:
-			// Fragment manageMenuFragment = new ManageMenuFragment();
-			// fragmentManager.beginTransaction()
-			// .replace(R.id.content_frame, manageMenuFragment).commit();
+			/* bring up a pop up dialog for a passcode input -- for admin access */
 			Intent in = new Intent(this, AdminActivity.class);
 			startActivity(in);
 
