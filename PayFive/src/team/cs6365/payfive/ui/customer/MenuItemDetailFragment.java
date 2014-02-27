@@ -14,12 +14,12 @@ import android.widget.Toast;
  * 
  * @author Jin
  */
-public class MenuItemFragment extends Fragment {
+public class MenuItemDetailFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.frag_manage_menu, container,
+		View rootView = inflater.inflate(R.layout.frag_menu_item_detail, container,
 				false);
 
 		getActivity().setTitle("Manage Menu");
