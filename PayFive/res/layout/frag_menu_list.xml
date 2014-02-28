@@ -18,14 +18,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF"
-    android:gravity="center"
-    android:padding="32dp" >
-    
+    android:orientation="vertical"
+    android:padding="10dp" >
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Menu List"
         android:textColor="#F00"
-        android:textSize="30sp"
-        android:text="Menu List" />
-    
+        android:textSize="20sp" />
+
+    <ListView
+        android:id="@+id/lv_menu_items"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" />
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="There is no menu item"
+        android:textColor="#000" />
+
 </LinearLayout>

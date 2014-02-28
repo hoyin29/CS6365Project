@@ -1,5 +1,6 @@
 package team.cs6365.payfive.ui.customer;
 
+import java.util.ArrayList;
 import java.util.List;
 import team.cs6365.payfive.R;
 import team.cs6365.payfive.model.MenuItem;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 /**
@@ -20,11 +22,13 @@ import android.widget.Toast;
  * 
  * @author Jin
  */
-public class MenuListFragment extends ListFragment implements
+public class MenuListFragment extends Fragment implements
 		LoaderManager.LoaderCallbacks<List<MenuItem>> {
 
 	private static final String TAG = "PayFive! - MenuListFragment";
 	private static final boolean DEBUG = true;
+	private MenuItemAdapter mAdapter;
+	private ListView lvMenuItems;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,6 +37,27 @@ public class MenuListFragment extends ListFragment implements
 				false);
 
 		getActivity().setTitle("Menu List");
+
+		lvMenuItems = (ListView) rootView.findViewById(R.id.lv_menu_items);
+
+		mAdapter = new MenuItemAdapter(getActivity());
+
+		lvMenuItems.setAdapter(mAdapter);
+
+		MenuItem m1 = new MenuItem();
+		m1.setName("Hot Dog");
+		m1.setPrice(1.99);
+
+		MenuItem m2 = new MenuItem();
+		m2.setName("Pretzel");
+		m2.setPrice(0.99);
+
+		List<MenuItem> list = new ArrayList<MenuItem>();
+		list.add(m1);
+		list.add(m2);
+
+		mAdapter.setItems(list);
+
 		return rootView;
 	}
 
