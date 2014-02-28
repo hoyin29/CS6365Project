@@ -26,7 +26,7 @@ public class EditMenuItemActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.frag_edit_menu_item);
+		setContentView(R.layout.activity_edit_menu_item);
 
 		setTitle("Edit Menu Item");
 

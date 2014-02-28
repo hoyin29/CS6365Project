@@ -30,6 +30,10 @@
             android:name="team.cs6365.payfive.ui.admin.AdminActivity"
             android:label="@string/title_activity_admin" >
         </activity>
+        <activity
+            android:name="team.cs6365.payfive.ui.admin.EditMenuItemActivity"
+            android:label="Edit Menu Item" >
+        </activity>
     </application>
 
 </manifest>

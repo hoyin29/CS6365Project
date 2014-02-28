@@ -10,16 +10,17 @@
         android:id="@+id/iv_photo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:background="#FFF"
         android:padding="4dp"
         android:src="@drawable/photo" />
 
     <EditText
         android:id="@+id/et_name"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:layout_toRightOf="@id/iv_photo"
         android:hint="Menu title"
         android:minWidth="150dp"
@@ -30,16 +31,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_name"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_toRightOf="@id/iv_photo"
         android:text="Price  $"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/et_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_name"
+        android:layout_alignTop="@id/lbl_price"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/lbl_price"
         android:hint="0.99"
         android:textSize="16sp" />
@@ -56,34 +58,31 @@
     <Spinner
         android:id="@+id/sp_category"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_below="@id/iv_photo"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/lbl_category"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/lbl_category"
-        android:minHeight="40dp"
-        android:text="1" />
+        android:minHeight="40dp" />
 
     <TextView
         android:id="@+id/lbl_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/lbl_category"
+        android:layout_below="@id/sp_category"
         android:layout_marginTop="30dp"
         android:text="Description"
         android:textSize="18sp" />
 
     <EditText
         android:id="@+id/et_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_below="@id/lbl_category"
-        android:layout_marginLeft="10dp"
-        android:layout_alignTop="@id/lbl_desc"
-        android:layout_toRightOf="@id/lbl_desc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lbl_desc"
+        android:layout_margin="20dp"
+        android:hint="Example description"
         android:lines="2"
-        android:minHeight="40dp"
-        android:minWidth="140dp"
-        android:hint="Example description" />
+        android:minHeight="80dp"
+        android:minWidth="140dp" />
 
 </RelativeLayout>
