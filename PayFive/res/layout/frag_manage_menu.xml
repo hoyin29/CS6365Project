@@ -18,14 +18,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF"
-    android:gravity="center"
+    android:orientation="vertical"
     android:padding="32dp" >
-    
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Manage Menu"
         android:textColor="#F00"
-        android:textSize="30sp"
-        android:text="Manage Menu" />
-    
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btn_edit_menu_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="edit menu item" />
+
 </LinearLayout>
