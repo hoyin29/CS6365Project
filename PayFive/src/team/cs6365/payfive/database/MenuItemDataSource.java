@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.BitmapFactory;
 
 public class MenuItemDataSource 
 {
@@ -71,6 +72,14 @@ public class MenuItemDataSource
 	
 	public MenuItem cursorToMenuItem(Cursor cur)
 	{
+		MenuItem mi = new MenuItem(cur.getString(1),
+				cur.getString(2),	
+				cur.getString(3),
+				cur.getDouble(4),
+				null);
 		
+		byte[] img = cur.getBlob(5);
+		mi.setThumbnail(BitmapFactory.decodeByteArray(img, 0, img.length));
+		return mi;
 	}
 }
