@@ -9,11 +9,15 @@ public class MenuItem {
 	private Bitmap thumbnail;
 
 	public MenuItem() {
-		this.name = "";
-		this.category = "";
-		this.description = "";
-		this.price = 0.0;
-		this.thumbnail = null;
+		this("", "", "", 0.0, null);
+	}
+	
+	public MenuItem(String name, String category, String description, double price, Bitmap thumbnail) {
+		this.name = name;
+		this.category = category;
+		this.description = description;
+		this.price = price;
+		this.thumbnail = thumbnail;
 	}
 
 	public String getName() {
