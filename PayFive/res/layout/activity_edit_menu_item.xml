@@ -57,13 +57,31 @@
 
     <Spinner
         android:id="@+id/sp_category"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/lbl_category"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/lbl_category"
         android:minHeight="40dp" />
+
+    <Button
+        android:id="@+id/btn_delete_category"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignBottom="@id/sp_category"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/sp_category"
+        android:background="@drawable/ic_action_discard" />
+
+    <Button
+        android:id="@+id/btn_add_category"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignBottom="@id/btn_delete_category"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/btn_delete_category"
+        android:background="@drawable/ic_action_new" />
 
     <TextView
         android:id="@+id/lbl_desc"
