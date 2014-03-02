@@ -1,5 +1,8 @@
 package team.cs6365.payfive.database;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import team.cs6365.payfive.model.MenuItem;
 import android.content.ContentValues;
 import android.content.Context;
@@ -54,7 +57,8 @@ public class MenuItemDataSource
 	
 	public MenuItem getMenuItem(String name, String category)
 	{
-		MenuItem mi = null;
+		MenuItem mi = new MenuItem();
+		
 		Cursor cur = db.query(DatabaseContract.TABLE_NAME, 
 				columns,
 				DatabaseContract.COLUMN_NAME_NAME + "='" + name + "' AND " + 
@@ -66,8 +70,30 @@ public class MenuItemDataSource
 			cur.moveToFirst();
 			mi = cursorToMenuItem(cur);	
 		}
+		
 		cur.close();
 		return mi;
+	}
+	
+	public List<MenuItem> getAllMenuItem()
+	{
+		List<MenuItem> mis = new ArrayList<MenuItem>();
+		
+		Cursor cur = db.query(DatabaseContract.TABLE_NAME, 
+				columns, null, null, null, null, null);
+		
+		if(cur != null && cur.getCount() > 0)
+		{
+			cur.moveToFirst();
+			while(!cur.isAfterLast())
+			{
+				mis.add(cursorToMenuItem(cur));
+				cur.moveToNext();
+			}
+		}
+		
+		cur.close();
+		return mis;
 	}
 	
 	public MenuItem cursorToMenuItem(Cursor cur)
