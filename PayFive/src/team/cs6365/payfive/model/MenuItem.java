@@ -4,12 +4,16 @@ import android.graphics.Bitmap;
 
 /* model object for menu item */
 public class MenuItem {
-	private String name = "";
-	private double price = 0.0;
-	private Bitmap thumbnail = null;
+	private String name, category, description;
+	private double price;
+	private Bitmap thumbnail;
 
 	public MenuItem() {
-
+		this.name = "";
+		this.category = "";
+		this.description = "";
+		this.price = 0.0;
+		this.thumbnail = null;
 	}
 
 	public String getName() {
@@ -20,6 +24,22 @@ public class MenuItem {
 		this.name = name;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	public double getPrice() {
 		return price;
 	}
@@ -35,5 +55,4 @@ public class MenuItem {
 	public void setThumbnail(Bitmap thumbnail) {
 		this.thumbnail = thumbnail;
 	}
-
 }
