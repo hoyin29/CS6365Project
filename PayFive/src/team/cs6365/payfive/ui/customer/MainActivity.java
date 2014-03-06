@@ -36,9 +36,6 @@ import team.cs6365.payfive.R.id;
 import team.cs6365.payfive.R.layout;
 import team.cs6365.payfive.R.menu;
 import team.cs6365.payfive.R.string;
-import team.cs6365.payfive.ui.admin.AdminActivity;
-import team.cs6365.payfive.ui.admin.ManageAdminAcctFragment;
-import team.cs6365.payfive.ui.admin.ManageMenuFragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -104,9 +101,12 @@ public class MainActivity extends Activity {
 	private String[] mDrawerMenus;
 
 	// drawer menus
-	private final int DRAWER_MENU_LIST = 0;
-	private final int DRAWER_VIEW_CART = 1;
-	private final int DRAWER_ADMIN_PANEL = 2;
+	// private final int DRAWER_MENU_LIST = 0;
+	// private final int DRAWER_VIEW_CART = 1;
+	// private final int DRAWER_ADMIN_PANEL = 2;
+	private final int NEW_TRANSACTION = 0;
+	private final int SCAN_TO_PAY = 1;
+	private final int HISTORY = 2;
 	private final int DRAWER_ABOUT = 3;
 
 	@Override
@@ -219,24 +219,24 @@ public class MainActivity extends Activity {
 
 		switch (position) {
 
-		case DRAWER_MENU_LIST:
-			Fragment menuListFragment = new MenuListFragment();
+		case NEW_TRANSACTION:
+			Fragment newTransactionFragment = new NewTransactionFragment();
 
 			fragmentManager.beginTransaction()
-					.replace(R.id.content_frame, menuListFragment).commit();
+					.replace(R.id.content_frame, newTransactionFragment)
+					.commit();
 			break;
 
-		case DRAWER_VIEW_CART:
-			Fragment viewCartfragment = new ViewCartFragment();
+		case SCAN_TO_PAY:
+			Fragment scanToPayFragment = new ScanToPayFragment();
 			fragmentManager.beginTransaction()
-					.replace(R.id.content_frame, viewCartfragment).commit();
+					.replace(R.id.content_frame, scanToPayFragment).commit();
 			break;
 
-		case DRAWER_ADMIN_PANEL:
-			/* bring up a pop up dialog for a passcode input -- for admin access */
-			Intent in = new Intent(this, AdminActivity.class);
-			startActivity(in);
-
+		case HISTORY:
+			Fragment historyFragment = new HistoryFragment();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, historyFragment).commit();
 			break;
 
 		case DRAWER_ABOUT:
@@ -246,7 +246,7 @@ public class MainActivity extends Activity {
 			break;
 
 		default:
-			Fragment defaultFragment = new MenuListFragment();
+			Fragment defaultFragment = new NewTransactionFragment();
 
 			fragmentManager.beginTransaction()
 					.replace(R.id.content_frame, defaultFragment).commit();
@@ -256,7 +256,7 @@ public class MainActivity extends Activity {
 
 		// update selected item and title, then close the drawer
 		mDrawerList.setItemChecked(position, true);
-		if (position != DRAWER_ADMIN_PANEL)
+		if (position != NEW_TRANSACTION)
 			setTitle(mDrawerMenus[position]);
 		mDrawerLayout.closeDrawer(mDrawerList);
 	}

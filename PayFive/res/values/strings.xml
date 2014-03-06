@@ -20,9 +20,9 @@
     <string name="app_name">PayFive!</string>
 
     <string-array name="drawer_menu">
-        <item>Menu List</item>
-        <item>View Cart</item>
-        <item>Admin Panel</item>
+        <item>New Transaction</item>
+        <item>Scan to Pay</item>
+        <item>History</item>
         <item>About</item>
     </string-array>
 
