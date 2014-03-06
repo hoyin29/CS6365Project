@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import team.cs6365.payfive.R;
 import team.cs6365.payfive.model.MenuItem;
+import team.cs6365.payfive.model.Transaction;
+import team.cs6365.payfive.model.User;
 import team.cs6365.payfive.ui.loader.MenuItemLoader;
 import android.app.Fragment;
 import android.app.ListFragment;
@@ -25,10 +27,10 @@ import android.widget.Toast;
 public class HistoryFragment extends Fragment implements
 		LoaderManager.LoaderCallbacks<List<MenuItem>> {
 
-	private static final String TAG = "PayFive! - MenuListFragment";
+	private static final String TAG = "PayFive! - HistoryFragment";
 	private static final boolean DEBUG = true;
-	private MenuItemAdapter mAdapter;
-	private ListView lvMenuItems;
+	private HistoryAdapter mAdapter;
+	private ListView lvHistory;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,23 +40,28 @@ public class HistoryFragment extends Fragment implements
 
 		getActivity().setTitle("History");
 
-		lvMenuItems = (ListView) rootView.findViewById(R.id.lv_menu_items);
+		lvHistory = (ListView) rootView.findViewById(R.id.lv_menu_items);
 
-		mAdapter = new MenuItemAdapter(getActivity());
+		mAdapter = new HistoryAdapter(getActivity());
 
-		lvMenuItems.setAdapter(mAdapter);
+		lvHistory.setAdapter(mAdapter);
 
-		MenuItem m1 = new MenuItem();
-		m1.setName("Hot Dog");
-		m1.setPrice(1.99);
+		List<Transaction> list = new ArrayList<Transaction>();
 
-		MenuItem m2 = new MenuItem();
-		m2.setName("Pretzel");
-		m2.setPrice(0.99);
+		Transaction t1 = new Transaction();
+		t1.setAmount(12.50);
+		t1.setDesc("Split pizza with George P. Burdell");
+		// t1.setSender(new User("JK"));
+		t1.setSendType(true);
 
-		List<MenuItem> list = new ArrayList<MenuItem>();
-		list.add(m1);
-		list.add(m2);
+		Transaction t2 = new Transaction();
+		t2.setAmount(8.50);
+		t2.setDesc("Lunch money return");
+		// t1.setSender(new User("JK"));
+		t2.setSendType(false);
+
+		list.add(t1);
+		list.add(t2);
 
 		mAdapter.setItems(list);
 

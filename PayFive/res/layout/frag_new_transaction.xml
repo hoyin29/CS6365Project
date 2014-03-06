@@ -41,6 +41,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="10dp"
         android:hint="Split pizza with George"
+        android:inputType="textMultiLine"
         android:minWidth="200dp"
         android:textSize="12sp" />
 
@@ -71,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:hint="1.99"
+            android:inputType="numberDecimal"
             android:minWidth="200dp"
             android:textSize="12sp" />
     </LinearLayout>

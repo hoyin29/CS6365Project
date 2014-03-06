@@ -8,25 +8,30 @@ public class Transaction implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private long id;
 	private List<MenuItem> items;
-	private User seller;
-	private List<User> buyers;
-	private double cost;
-	private String date, title;
-	
+	private User recipient;
+	private User sender;
+	private double amount;
+	private String date, desc;
+	private boolean sendType = true; // true for send, false for receive of
+										// payment
+
 	public Transaction() {
-		this(0, null, null, null, 0.0, null, null);
+		this(0, null, null, null, 0.0, null, null, true);
 	}
-	
-	public Transaction(long id, List<MenuItem> items, User seller, List<User> buyers, double cost, String date, String title) {
+
+	public Transaction(long id, List<MenuItem> items, User recipient,
+			User sender, double amount, String date, String desc,
+			boolean sendType) {
 		this.id = id;
 		this.items = items;
-		this.seller = seller;
-		this.buyers = buyers;
-		this.cost = cost;
+		this.recipient = recipient;
+		this.sender = sender;
+		this.amount = amount;
 		this.date = date;
-		this.title = title;
+		this.desc = desc;
+		this.sendType = sendType;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -43,28 +48,12 @@ public class Transaction implements Serializable {
 		this.items = items;
 	}
 
-	public User getSeller() {
-		return seller;
+	public double getAmount() {
+		return amount;
 	}
 
-	public void setSeller(User seller) {
-		this.seller = seller;
-	}
-
-	public List<User> getBuyers() {
-		return buyers;
-	}
-
-	public void setBuyers(List<User> buyers) {
-		this.buyers = buyers;
-	}
-
-	public double getCost() {
-		return cost;
-	}
-
-	public void setCost(double cost) {
-		this.cost = cost;
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
 
 	public String getDate() {
@@ -76,10 +65,43 @@ public class Transaction implements Serializable {
 	}
 
 	public String getTitle() {
-		return title;
+		return desc;
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.desc = title;
 	}
+
+	public User getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(User recipient) {
+		this.recipient = recipient;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public User getSender() {
+		return sender;
+	}
+
+	public void setSender(User sender) {
+		this.sender = sender;
+	}
+
+	public boolean isSendType() {
+		return sendType;
+	}
+
+	public void setSendType(boolean sendType) {
+		this.sendType = sendType;
+	}
+
 }
