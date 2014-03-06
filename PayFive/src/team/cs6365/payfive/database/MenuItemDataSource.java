@@ -14,16 +14,16 @@ import android.graphics.BitmapFactory;
 public class MenuItemDataSource 
 {
 	private SQLiteDatabase db;
-	private DatabaseHelper dbHelper;
-	private String[] columns = {DatabaseContract.COLUMN_NAME_NAME,
-			DatabaseContract.COLUMN_NAME_PRICE,
-			DatabaseContract.COLUMN_NAME_CATEGORY,
-			DatabaseContract.COLUMN_NAME_DESCRIPTION,
-			DatabaseContract.COLUMN_NAME_THUMBNAIL};
+	private MenuItemDatabaseHelper dbHelper;
+	private String[] columns = {MenuItemDatabaseContract.COLUMN_NAME_NAME,
+			MenuItemDatabaseContract.COLUMN_NAME_PRICE,
+			MenuItemDatabaseContract.COLUMN_NAME_CATEGORY,
+			MenuItemDatabaseContract.COLUMN_NAME_DESCRIPTION,
+			MenuItemDatabaseContract.COLUMN_NAME_THUMBNAIL};
 	
 	public MenuItemDataSource(Context context)
 	{
-		dbHelper = new DatabaseHelper(context);
+		dbHelper = new MenuItemDatabaseHelper(context);
 	}
 	
 	public void open() throws SQLException
@@ -44,14 +44,14 @@ public class MenuItemDataSource
 		row.put(columns[2], description);
 		row.put(columns[3], price);
 		row.put(columns[4], thumbnail);
-		db.insert(DatabaseContract.TABLE_NAME, null, row);
+		db.insert(MenuItemDatabaseContract.TABLE_NAME, null, row);
 	}
 	
 	public void deleteMenuItem(MenuItem item)
 	{
-		db.delete(DatabaseContract.TABLE_NAME, 
-				DatabaseContract.COLUMN_NAME_NAME + "='" + item.getName() + "' AND " + 
-				DatabaseContract.COLUMN_NAME_CATEGORY + "='" + item.getCategory() + "'",
+		db.delete(MenuItemDatabaseContract.TABLE_NAME, 
+				MenuItemDatabaseContract.COLUMN_NAME_NAME + "='" + item.getName() + "' AND " + 
+				MenuItemDatabaseContract.COLUMN_NAME_CATEGORY + "='" + item.getCategory() + "'",
 				null);
 	}
 	
@@ -59,10 +59,10 @@ public class MenuItemDataSource
 	{
 		MenuItem mi = new MenuItem();
 		
-		Cursor cur = db.query(DatabaseContract.TABLE_NAME, 
+		Cursor cur = db.query(MenuItemDatabaseContract.TABLE_NAME, 
 				columns,
-				DatabaseContract.COLUMN_NAME_NAME + "='" + name + "' AND " + 
-				DatabaseContract.COLUMN_NAME_CATEGORY + "='" + category + "'", 
+				MenuItemDatabaseContract.COLUMN_NAME_NAME + "='" + name + "' AND " + 
+				MenuItemDatabaseContract.COLUMN_NAME_CATEGORY + "='" + category + "'", 
 				null, null, null, null);
 		
 		if(cur != null && cur.getCount() > 0)
@@ -79,7 +79,7 @@ public class MenuItemDataSource
 	{
 		List<MenuItem> mis = new ArrayList<MenuItem>();
 		
-		Cursor cur = db.query(DatabaseContract.TABLE_NAME, 
+		Cursor cur = db.query(MenuItemDatabaseContract.TABLE_NAME, 
 				columns, null, null, null, null, null);
 		
 		if(cur != null && cur.getCount() > 0)
