@@ -2,8 +2,7 @@ package team.cs6365.payfive.model;
 
 import java.util.List;
 
-public class Transaction 
-{
+public class Transaction {
 	private long id;
 	private List<MenuItem> items;
 	private User seller;
@@ -11,13 +10,11 @@ public class Transaction
 	private double cost;
 	private String date, title;
 	
-	public Transaction() 
-	{
+	public Transaction() {
 		this(0, null, null, null, 0.0, null, null);
 	}
 	
-	public Transaction(long id, List<MenuItem> items, User seller, List<User> buyers, double cost, String date, String title)
-	{
+	public Transaction(long id, List<MenuItem> items, User seller, List<User> buyers, double cost, String date, String title) {
 		this.id = id;
 		this.items = items;
 		this.seller = seller;
