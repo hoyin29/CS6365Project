@@ -1,8 +1,11 @@
 package team.cs6365.payfive.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Transaction {
+public class Transaction implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private List<MenuItem> items;
 	private User seller;
