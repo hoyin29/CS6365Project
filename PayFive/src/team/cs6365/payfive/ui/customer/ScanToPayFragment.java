@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import org.json.JSONException;
 
+import team.cs6365.payfive.PayFive;
 import team.cs6365.payfive.R;
 import team.cs6365.payfive.model.Transaction;
 import team.cs6365.payfive.model.User;
@@ -34,8 +35,9 @@ import com.paypal.android.sdk.payments.PaymentConfirmation;
  */
 public class ScanToPayFragment extends Fragment implements OnClickListener {
 
-	private static final String TAG = "PayFive! - ScanToPayFragment";
-	private static final boolean DEBUG = true;
+	private PayFive payfive;
+
+	private static final String TAG = "~~~PayFive~~~ ## ScanToPayFragment ## ";
 
 	private Transaction scanned;
 
@@ -58,6 +60,8 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.frag_scan_to_pay, container,
 				false);
+
+		payfive = (PayFive) getActivity().getApplication();
 
 		getActivity().setTitle("Scan to Pay");
 
@@ -119,7 +123,7 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 				try {
 					Log.i("paymentExample", confirm.toJSONObject().toString(4));
 					// TODO: need to test confirmation
-					if (DEBUG)
+					if (payfive.DEBUG)
 						Log.d(TAG, "payment confirmation received");
 
 					// TODO: send 'confirm' to your server for verification.

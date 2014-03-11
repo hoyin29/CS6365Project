@@ -37,6 +37,7 @@ import team.cs6365.payfive.R.layout;
 import team.cs6365.payfive.R.menu;
 import team.cs6365.payfive.R.string;
 import android.app.Activity;
+import android.app.Application;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
@@ -109,10 +110,14 @@ public class MainActivity extends Activity {
 	private final int HISTORY = 2;
 	private final int DRAWER_ABOUT = 3;
 
+	private Application payfive;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		payfive = getApplication();
 
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerMenus = getResources().getStringArray(R.array.drawer_menu);
