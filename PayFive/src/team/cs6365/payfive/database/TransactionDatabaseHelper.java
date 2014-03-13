@@ -12,10 +12,11 @@ public class TransactionDatabaseHelper extends SQLiteOpenHelper
     public static final String SQL_CREATE_TRANSACTION_TABLE = 
     		"CREATE TABLE " +  TransactionDatabaseContract.TABLE_NAME + " (" + 
     		TransactionDatabaseContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-    		TransactionDatabaseContract.COLUMN_NAME_SELLER + " TEXT NOT NULL, " +  
-    		TransactionDatabaseContract.COLUMN_NAME_BUYER + " BLOB NOT NULL, " + 
+    		TransactionDatabaseContract.COLUMN_NAME_RECIPIENT + " TEXT NOT NULL, " +  
+    		TransactionDatabaseContract.COLUMN_NAME_SENDER + " TEXT NOT NULL, " + 
+    		TransactionDatabaseContract.COLUMN_NAME_TYPE + " INTEGER NOT NULL, " + 
     		TransactionDatabaseContract.COLUMN_NAME_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, " + 
-    		TransactionDatabaseContract.COLUMN_NAME_COST + " REAL NOT NULL, " +
+    		TransactionDatabaseContract.COLUMN_NAME_AMOUNT + " REAL NOT NULL, " +
     		TransactionDatabaseContract.COLUMN_NAME_ITEM + " BLOB NOT NULL)";
     
     public static final String SQL_DROP_TRANSACTION_TABLE = 
