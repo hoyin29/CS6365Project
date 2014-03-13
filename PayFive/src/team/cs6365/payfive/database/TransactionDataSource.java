@@ -73,7 +73,7 @@ public class TransactionDataSource
 	
 	public Transaction getTransaction(String recipient, String sender, boolean type, String description, String date, double amount)
 	{
-		Transaction mi = new Transaction();
+		Transaction t = new Transaction();
 		
 		Cursor cur = db.query(TransactionDatabaseContract.TABLE_NAME, 
 				columns,
@@ -88,16 +88,16 @@ public class TransactionDataSource
 		if(cur != null && cur.getCount() > 0)
 		{
 			cur.moveToFirst();
-			mi = cursorToTransaction(cur);	
+			t = cursorToTransaction(cur);	
 		}
 		
 		cur.close();
-		return mi;
+		return t;
 	}
 	
 	public List<Transaction> getAllTransaction()
 	{
-		List<Transaction> mis = new ArrayList<Transaction>();
+		List<Transaction> ts = new ArrayList<Transaction>();
 		
 		Cursor cur = db.query(TransactionDatabaseContract.TABLE_NAME, 
 				columns, null, null, null, null, null);
@@ -107,13 +107,13 @@ public class TransactionDataSource
 			cur.moveToFirst();
 			while(!cur.isAfterLast())
 			{
-				mis.add(cursorToTransaction(cur));
+				ts.add(cursorToTransaction(cur));
 				cur.moveToNext();
 			}
 		}
 		
 		cur.close();
-		return mis;
+		return ts;
 	}
 	
 	public Transaction cursorToTransaction(Cursor cur)
