@@ -4,8 +4,12 @@ public class User {
 	String name = "";
 	String paypalId = "";
 
+	public User() {
+		this("", "");
+	}
+	
 	public User(String name) {
-		this(name, null);
+		this(name, "");
 	}
 	
 	public User(String name, String paypalId) {
