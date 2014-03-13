@@ -14,7 +14,8 @@ public class TransactionDatabaseHelper extends SQLiteOpenHelper
     		TransactionDatabaseContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
     		TransactionDatabaseContract.COLUMN_NAME_RECIPIENT + " TEXT NOT NULL, " +  
     		TransactionDatabaseContract.COLUMN_NAME_SENDER + " TEXT NOT NULL, " + 
-    		TransactionDatabaseContract.COLUMN_NAME_TYPE + " INTEGER NOT NULL, " + 
+    		TransactionDatabaseContract.COLUMN_NAME_TYPE + " INTEGER NOT NULL, " +
+    		TransactionDatabaseContract.COLUMN_NAME_DESCRIPTION + " TEXT NOT NULL, " +
     		TransactionDatabaseContract.COLUMN_NAME_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, " + 
     		TransactionDatabaseContract.COLUMN_NAME_AMOUNT + " REAL NOT NULL, " +
     		TransactionDatabaseContract.COLUMN_NAME_ITEM + " BLOB NOT NULL)";
