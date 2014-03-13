@@ -2,7 +2,7 @@ package team.cs6365.payfive.database;
 
 import android.provider.BaseColumns;
 
-public class TransactionDatabaseContract implements BaseColumns
+public abstract class TransactionDatabaseContract implements BaseColumns
 {
     public static final String TABLE_NAME = "transaction";
     public static final String COLUMN_NAME_RECIPIENT = "recipient";
@@ -13,7 +13,7 @@ public class TransactionDatabaseContract implements BaseColumns
     public static final String COLUMN_NAME_AMOUNT = "amount";
     public static final String COLUMN_NAME_ITEM = "item";
     
-    public TransactionDatabaseContract()
+    private TransactionDatabaseContract()
     {
     	
     }
