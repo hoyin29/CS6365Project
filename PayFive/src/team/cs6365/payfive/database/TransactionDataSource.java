@@ -6,6 +6,7 @@ import java.util.List;
 import team.cs6365.payfive.model.MenuItem;
 import team.cs6365.payfive.model.Serializer;
 import team.cs6365.payfive.model.Transaction;
+import team.cs6365.payfive.model.User;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -62,22 +63,26 @@ public class TransactionDataSource
 	public void deleteTransaction(Transaction item)
 	{
 		db.delete(TransactionDatabaseContract.TABLE_NAME, 
-				columns[0] + "='" + item.getRecipient() + "' AND " + 
-				columns[1] + "='" + item.getSender() + "' AND " + 
+				columns[0] + "='" + item.getRecipient().getName() + "' AND " + 
+				columns[1] + "='" + item.getSender().getName() + "' AND " + 
 				columns[2] + "=" + item.getSendType() + " AND " + 
 				columns[3] + "='" + item.getDesc() + "' AND " + 
 				columns[4] + "='" + item.getDate() + "' AND " + 
 				columns[5] + "=" + item.getAmount(), null);
 	}
 	
-	public Transaction getTransaction(String name, String category)
+	public Transaction getTransaction(String recipient, String sender, boolean type, String description, String date, double amount)
 	{
 		Transaction mi = new Transaction();
 		
 		Cursor cur = db.query(TransactionDatabaseContract.TABLE_NAME, 
 				columns,
-				TransactionDatabaseContract.COLUMN_NAME_NAME + "='" + name + "' AND " + 
-				TransactionDatabaseContract.COLUMN_NAME_CATEGORY + "='" + category + "'", 
+				columns[0] + "='" + recipient + "' AND " + 
+				columns[1] + "='" + sender + "' AND " + 
+				columns[2] + "=" + type + " AND " + 
+				columns[3] + "='" + description + "' AND " + 
+				columns[4] + "='" + date + "' AND " + 
+				columns[5] + "=" + amount, 
 				null, null, null, null);
 		
 		if(cur != null && cur.getCount() > 0)
@@ -113,14 +118,14 @@ public class TransactionDataSource
 	
 	public Transaction cursorToTransaction(Cursor cur)
 	{
-		Transaction mi = new Transaction(cur.getString(1),
-				cur.getString(2),	
-				cur.getString(3),
-				cur.getDouble(4),
-				null);
-		
-		byte[] img = cur.getBlob(5);
-		mi.setThumbnail(BitmapFactory.decodeByteArray(img, 0, img.length));
-		return mi;
+		Transaction t = new Transaction(cur.getLong(0),
+				(List<MenuItem>)Serializer.deserialize(cur.getBlob(7)),
+				new User(cur.getString(1)),
+				new User(cur.getString(2)),	
+				cur.getDouble(6),
+				cur.getString(4),
+				cur.getString(5),
+				cur.getInt(3) == 1 ? true : false);
+		return t;
 	}
 }
