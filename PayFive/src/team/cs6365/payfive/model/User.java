@@ -4,6 +4,10 @@ public class User {
 	String name = "";
 	String paypalId = "";
 
+	public User(String name) {
+		this(name, null);
+	}
+	
 	public User(String name, String paypalId) {
 		this.name = name;
 		this.paypalId = paypalId;
