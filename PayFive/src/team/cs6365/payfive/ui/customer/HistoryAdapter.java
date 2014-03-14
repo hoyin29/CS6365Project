@@ -48,27 +48,32 @@ public class HistoryAdapter extends BaseAdapter {
 
 			((TextView) view.findViewById(R.id.tv_desc)).setText(current
 					.getDesc());
-			((TextView) view.findViewById(R.id.tv_amount)).setText("$ "
-					+ String.valueOf(String.valueOf(current.getAmount())));
-			((TextView) view.findViewById(R.id.tv_date)).setText(current
-					.getDate());
+			((TextView) view.findViewById(R.id.tv_amount)).setText(String
+					.valueOf(current.getAmount()));
+
+			// TODO: ((TextView)
+			// view.findViewById(R.id.tv_date)).setText(current
+			// .getDate());
 			Drawable thumbnail;
 			String fromTo = "";
 
 			if (current.isSendType()) {
 				// if sending transaction
 				thumbnail = ctx.getResources().getDrawable(R.drawable.send);
+				((TextView) view.findViewById(R.id.tv_type)).setText("sent to");
 				// TODO fromTo = current.getRecipient().getName();
 			} else {
 				// if receiving transaction
 				thumbnail = ctx.getResources().getDrawable(R.drawable.recv);
+				((TextView) view.findViewById(R.id.tv_type))
+						.setText("received from");
 				// TODO fromTo = current.getSender().getName();
 			}
 
 			((ImageView) view.findViewById(R.id.iv_thumbnail))
 					.setImageDrawable(thumbnail);
 			// TODO
-			((TextView) view.findViewById(R.id.tv_from_to))
+			((TextView) view.findViewById(R.id.tv_person))
 					.setText("George P. Burdell");
 		}
 

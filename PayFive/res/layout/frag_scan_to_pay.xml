@@ -14,15 +14,15 @@
   limitations under the License.
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
 
     <LinearLayout
+        style="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFF"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp" >
+        android:padding="10dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,81 +31,39 @@
             android:text="Transaction Info"
             android:textSize="20sp" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+        <TextView
+            style="@style/label"
+            android:paddingRight="10dp"
+            android:text="Sending" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:orientation="vertical" >
+        <TextView
+            style="@style/content"
+            android:text="$6.50"
+            android:textSize="20sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_margin="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Sending"
-                    android:textSize="20sp" />
+        <TextView
+            style="@style/label"
+            android:paddingRight="10dp"
+            android:text="To" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_margin="10dp"
-                    android:paddingRight="10dp"
-                    android:text="To"
-                    android:textSize="20sp" />
+        <TextView
+            style="@style/content"
+            android:text="John"
+            android:textSize="20sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_margin="10dp"
-                    android:paddingRight="10dp"
-                    android:text="For"
-                    android:textSize="20sp" />
-            </LinearLayout>
+        <TextView
+            style="@style/label"
+            android:paddingRight="10dp"
+            android:text="For" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="$6.50"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="John"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="Split pizza with George"
-                    android:textSize="16sp" />
-            </LinearLayout>
-        </LinearLayout>
+        <TextView
+            style="@style/content"
+            android:text="Split pizza with George"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btn_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:maxWidth="200dp"
+            style="@style/btn"
             android:text="Confirm and Pay using PayPal" />
     </LinearLayout>
 

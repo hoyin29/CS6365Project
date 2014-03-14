@@ -14,96 +14,93 @@
   limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFF"
-    android:orientation="vertical"
-    android:padding="16dp" >
-
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="152dp"
-        android:layout_height="34dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/loginwithpaypalbutton" />
-    
-    <TextView
-        android:id="@+id/tv_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Profile text" />
-
-    <TextView
-        android:id="@+id/lbl_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:text="Transaction description" />
-
-    <EditText
-        android:id="@+id/et_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="10dp"
-        android:hint="Split pizza with George"
-        android:inputType="textMultiLine"
-        android:minWidth="200dp"
-        android:textSize="12sp" />
-
-    <TextView
-        android:id="@+id/lbl_amt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:text="Transaction amount" />
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
 
     <LinearLayout
-        android:id="@+id/ll_amount_container"
-        android:layout_width="wrap_content"
+        style="@color/white"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal" >
+        android:padding="10dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="152dp"
+            android:layout_height="34dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/loginwithpaypalbutton" />
 
         <TextView
-            android:id="@+id/lbl_$"
+            android:id="@+id/tv_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="$" />
+            android:layout_marginBottom="10dp"
+            android:text="Profile text" />
+
+        <TextView
+            android:id="@+id/lbl_desc"
+            style="@style/label"
+            android:text="Description" />
 
         <EditText
-            android:id="@+id/et_amt"
-            android:layout_width="100dp"
+            android:id="@+id/et_desc"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:layout_marginLeft="10dp"
-            android:hint="1.99"
-            android:inputType="numberDecimal"
+            android:hint="Split pizza with George"
+            android:inputType="textMultiLine"
             android:minWidth="200dp"
             android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/lbl_amt"
+            style="@style/label"
+            android:text="Amount" />
+
+        <LinearLayout
+            android:id="@+id/ll_amount_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/lbl_$"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="$" />
+
+            <EditText
+                android:id="@+id/et_amt"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:hint="1.99"
+                android:inputType="numberDecimal"
+                android:minWidth="200dp"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_btn_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btn_scan"
+                style="@style/btn"
+                android:text="Scan Credit Card" />
+
+            <Button
+                android:id="@+id/btn_gen_qr"
+                style="@style/btn"
+                android:text="Generate QR Code for Payer" />
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_amount_container"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/btn_scan"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_weight="1"
-            android:text="Scan Credit Card" />
-
-        <Button
-            android:id="@+id/btn_gen_qr"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_weight="1"
-            android:text="Generate QR Code for Payer" />
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

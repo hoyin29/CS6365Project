@@ -49,13 +49,13 @@ public class HistoryFragment extends Fragment implements
 		List<Transaction> list = new ArrayList<Transaction>();
 
 		Transaction t1 = new Transaction();
-		t1.setAmount(12.50);
+		t1.setAmount(12.59);
 		t1.setDesc("Split pizza with George P. Burdell");
 		// t1.setSender(new User("JK"));
 		t1.setSendType(true);
 
 		Transaction t2 = new Transaction();
-		t2.setAmount(8.50);
+		t2.setAmount(3);
 		t2.setDesc("Lunch money return");
 		// t1.setSender(new User("JK"));
 		t2.setSendType(false);
