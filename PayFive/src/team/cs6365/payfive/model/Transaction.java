@@ -100,6 +100,10 @@ public class Transaction implements Serializable {
 		return sendType;
 	}
 
+	public int getSendType() {
+		return sendType ? 1 : 0; 
+	}
+	
 	public void setSendType(boolean sendType) {
 		this.sendType = sendType;
 	}
