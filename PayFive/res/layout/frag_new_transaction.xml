@@ -22,15 +22,46 @@
         style="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <RelativeLayout
+            android:id="@+id/rl_btn_paypal_login"
+            android:layout_width="fill_parent"
+            android:layout_height="56dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/theme_bg" >
+
+            <TextView
+                android:id="@+id/tv_btn_paypal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingLeft="10dp"
+                android:text="Login with PayPal"
+                android:textColor="#FFF"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/iv_paypal"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/tv_btn_paypal"
+                android:contentDescription="paypal"
+                android:src="@drawable/paypal" />
+        </RelativeLayout>
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="152dp"
-            android:layout_height="34dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/loginwithpaypalbutton" />
+            style="@style/btn"
+            android:drawableLeft="@drawable/paypal"
+            android:drawableStart="@drawable/paypal"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="Login with PayPal" />
 
         <TextView
             android:id="@+id/tv_profile"
@@ -49,11 +80,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="14dp"
             android:hint="Split pizza with George"
             android:inputType="textMultiLine"
+            android:maxLines="3"
             android:minWidth="200dp"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/lbl_amt"
@@ -71,7 +103,7 @@
                 android:id="@+id/lbl_$"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="16dp"
                 android:text="$" />
 
             <EditText
@@ -79,10 +111,10 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:hint="1.99"
+                android:hint="0.00"
                 android:inputType="numberDecimal"
                 android:minWidth="200dp"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout

@@ -14,6 +14,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -64,6 +67,7 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 		payfive = (PayFive) getActivity().getApplication();
 
 		getActivity().setTitle("Scan to Pay");
+		setHasOptionsMenu(true);
 
 		/* PayPal service */
 		Intent intent = new Intent(getActivity(), PayPalService.class);
@@ -171,6 +175,34 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 		default:
 			break;
 
+		}
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.scan_to_pay_frag, menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// // The action bar home/up action should open or close the drawer.
+		// // ActionBarDrawerToggle will take care of this.
+		// if (mDrawerToggle.onOptionsItemSelected(item)) {
+		// return true;
+		// }
+		// Handle action buttons
+		switch (item.getItemId()) {
+		case R.id.action_scan_qr:
+			// action bar icon scan qr is clicked
+			Toast.makeText(getActivity(), "Scan QR code", Toast.LENGTH_SHORT)
+					.show();
+			// TODO: Here make an intent to scan qr activity
+			// and launch activity for result
+			
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 	}
 }
