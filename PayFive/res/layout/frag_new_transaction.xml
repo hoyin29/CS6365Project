@@ -28,7 +28,7 @@
         <RelativeLayout
             android:id="@+id/rl_btn_paypal_login"
             android:layout_width="fill_parent"
-            android:layout_height="56dp"
+            android:layout_height="44dp"
             android:layout_marginLeft="14dp"
             android:layout_marginRight="14dp"
             android:layout_marginTop="8dp"
@@ -54,21 +54,29 @@
                 android:src="@drawable/paypal" />
         </RelativeLayout>
 
-        <Button
-            android:id="@+id/btn_login"
-            style="@style/btn"
-            android:drawableLeft="@drawable/paypal"
-            android:drawableStart="@drawable/paypal"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:text="Login with PayPal" />
-
-        <TextView
-            android:id="@+id/tv_profile"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="Profile text" />
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_paypal"
+                style="@style/content"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Not Logged into PayPal"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_paypal_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_paypal"
+                android:layout_toRightOf="@id/tv_paypal"
+                android:text="username"
+                android:textSize="12sp" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/lbl_desc"
@@ -126,12 +134,20 @@
             <Button
                 android:id="@+id/btn_scan"
                 style="@style/btn"
-                android:text="Scan Credit Card" />
+                android:drawableLeft="@drawable/creditcard"
+                android:drawablePadding="4dp"
+                android:drawableStart="@drawable/creditcard"
+                android:paddingLeft="8dp"
+                android:text="Scan Sender&apos;s Credit Card" />
 
             <Button
                 android:id="@+id/btn_gen_qr"
                 style="@style/btn"
-                android:text="Generate QR Code for Payer" />
+                android:drawableLeft="@drawable/action_scan_qr"
+                android:drawablePadding="4dp"
+                android:drawableStart="@drawable/action_scan_qr"
+                android:paddingLeft="8dp"
+                android:text="Create QR Code for Sender" />
         </LinearLayout>
     </LinearLayout>
 
