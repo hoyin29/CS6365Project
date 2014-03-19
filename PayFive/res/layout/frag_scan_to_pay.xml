@@ -37,6 +37,7 @@
             android:text="Sending" />
 
         <TextView
+            android:id="@+id/txtAmount"
             style="@style/content"
             android:text="$6.50"
             android:textSize="20sp" />
@@ -47,6 +48,7 @@
             android:text="To" />
 
         <TextView
+                android:id="@+id/txtName"
             style="@style/content"
             android:text="John"
             android:textSize="20sp" />
@@ -57,6 +59,7 @@
             android:text="For" />
 
         <TextView
+                android:id="@+id/txtDescription"
             style="@style/content"
             android:text="Split pizza with George"
             android:textSize="16sp" />

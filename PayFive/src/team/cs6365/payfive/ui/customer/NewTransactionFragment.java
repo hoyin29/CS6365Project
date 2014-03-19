@@ -53,12 +53,20 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
 
 		tvPaypal = (TextView) view.findViewById(R.id.tv_paypal);
 		tvPaypalUser = (TextView) view.findViewById(R.id.tv_paypal_user);
-
-		tvPaypal.setText("Not logged into PayPal");
-		tvPaypalUser.setText("");
+        if(MainActivity.isLoggedIn){
+            tvPaypal.setText("Receiver PayPal:");
+        }
+        else{
+		    tvPaypal.setText("Not logged into PayPal");
+        }
 
         etDescription = (EditText) view.findViewById(R.id.et_desc);
         etAmount = (EditText) view.findViewById(R.id.et_amt);
+
+        StringBuilder sb = new StringBuilder("").append(MainActivity.email).append("\n")
+                .append(MainActivity.name).append("\n").append(MainActivity.phone);
+
+        tvPaypalUser.setText(sb.toString());
 
 		getActivity().setTitle("New Transaction");
 		return view;
@@ -75,7 +83,7 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
                 break;
             case R.id.btn_gen_qr:
                 Intent intent = new Intent(getActivity(), CreateQRCodeActivity.class);
-                String[] strings = {etDescription.getText().toString(), etAmount.getText().toString()};
+                String[] strings = {etDescription.getText().toString(), etAmount.getText().toString(),MainActivity.email,MainActivity.name};
                 intent.putExtra(EXTRA_QR_INFO, strings);
                 startActivity(intent);
 
@@ -102,7 +110,7 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
 					R.string.toast_login_ok, Toast.LENGTH_LONG).show();
 			String paypalUserResult = data
 					.getStringExtra(AccessHelperConnect.DATA_PROFILE);
-
+            MainActivity.isLoggedIn=true;
 			JSONObject paypalUser = new JSONObject();
 			try {
 				paypalUser = new JSONObject(paypalUserResult);
@@ -111,9 +119,9 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
 				e.printStackTrace();
 			}
 
-			String email = paypalUser.optString("email");
-			String name = paypalUser.optString("name");
-			String phone = paypalUser.optString("phone_number");
+			MainActivity.email = paypalUser.optString("email");
+			MainActivity.name = paypalUser.optString("name");
+			MainActivity.phone = paypalUser.optString("phone_number");
 
 			// TODO: save these info in activity not in frag
 
@@ -122,8 +130,8 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
 
 			// Set the raw json representation as content of the TextView
 			tvPaypal.setText("Receiver PayPal:");
-			StringBuilder sb = new StringBuilder("").append(email).append("\n")
-					.append(name).append("\n").append(phone);
+			StringBuilder sb = new StringBuilder("").append(MainActivity.email).append("\n")
+					.append(MainActivity.name).append("\n").append(MainActivity.phone);
 
 			tvPaypalUser.setText(sb.toString());
 

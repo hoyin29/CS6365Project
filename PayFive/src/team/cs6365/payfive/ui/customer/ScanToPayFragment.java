@@ -2,6 +2,7 @@ package team.cs6365.payfive.ui.customer;
 
 import java.math.BigDecimal;
 
+import android.widget.TextView;
 import org.json.JSONException;
 
 import team.cs6365.payfive.PayFive;
@@ -61,6 +62,16 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
     public static final int REQUEST_CODE_SCANBARCODE = 1;
     public static final String SCANBARCODE_RESULT = "barcode_result";
 
+
+    private TextView txtAmount;
+    private TextView txtName;
+    private TextView txtDescription;
+
+    String amount;
+    String email;
+    String name;
+    String description ="";
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -94,6 +105,10 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 		Button btnConfirm = (Button) view.findViewById(R.id.btn_confirm);
 		btnConfirm.setOnClickListener(this);
 
+        txtAmount = (TextView) view.findViewById(R.id.txtAmount);
+        txtName = (TextView) view.findViewById(R.id.txtName);
+        txtDescription =(TextView) view.findViewById(R.id.txtDescription);
+
 		return view;
 	}
 
@@ -126,6 +141,16 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
         if(requestCode==REQUEST_CODE_SCANBARCODE){
             if(resultCode == Activity.RESULT_OK){
                 String result=data.getStringExtra(SCANBARCODE_RESULT);
+                String[] strings = result.split(";");
+                amount = strings[0];
+                email = strings[1];
+                name = strings[2];
+                for(int i=3; i<strings.length; i++){
+                    description += strings[i];
+                }
+                txtName.setText(name);
+                txtAmount.setText(amount);
+                txtDescription.setText(description);
                 Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
             }
             if (resultCode == Activity.RESULT_CANCELED) {

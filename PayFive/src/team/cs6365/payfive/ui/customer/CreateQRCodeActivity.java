@@ -32,7 +32,7 @@ public class CreateQRCodeActivity extends Activity {
         //ByteArrayOutputStream out = QRCode.from("Hello").stream();
         // barcode data
         String[] strings = getIntent().getStringArrayExtra(NewTransactionFragment.EXTRA_QR_INFO);
-        String barcode_data = strings[0] +"," +strings[1];
+        String barcode_data =  strings[1]+";"+strings[2]+";"+strings[3]+";"+strings[0];
 
         // barcode image
         Bitmap bitmap = null;

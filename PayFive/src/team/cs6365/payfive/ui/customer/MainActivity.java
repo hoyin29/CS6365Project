@@ -112,6 +112,11 @@ public class MainActivity extends Activity {
 
 	private Application payfive;
 
+    static String email="";
+    static String name="";
+    static String phone="";
+
+    static boolean isLoggedIn =false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
