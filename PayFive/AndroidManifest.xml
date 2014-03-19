@@ -51,7 +51,9 @@
             android:name="team.cs6365.payfive.ui.admin.EditMenuItemActivity"
             android:label="Edit Menu Item" >
         </activity>
-
+        <activity android:name=".ui.customer.ScanBarCodeActivity"
+                  android:label="Scan QR Code"/>
+        <activity android:name=".ui.customer.CreateQRCodeActivity"/>
         <service
             android:name="com.paypal.android.sdk.payments.PayPalService"
             android:exported="false" />

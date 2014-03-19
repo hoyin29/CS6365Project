@@ -58,6 +58,9 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 	// when testing in sandbox, this is likely the -facilitator email address.
 	private static final String CONFIG_RECEIVER_EMAIL = "ppsandbox6911@gmail.com";
 
+    public static final int REQUEST_CODE_SCANBARCODE = 1;
+    public static final String SCANBARCODE_RESULT = "barcode_result";
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -120,33 +123,45 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == Activity.RESULT_OK) {
-			PaymentConfirmation confirm = data
-					.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
-			if (confirm != null) {
-				try {
-					Log.i("paymentExample", confirm.toJSONObject().toString(4));
-					// TODO: need to test confirmation
-					if (payfive.DEBUG)
-						Log.d(TAG, "payment confirmation received");
+        if(requestCode==REQUEST_CODE_SCANBARCODE){
+            if(resultCode == Activity.RESULT_OK){
+                String result=data.getStringExtra(SCANBARCODE_RESULT);
+                Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+        else{
+            if (resultCode == Activity.RESULT_OK) {
+                PaymentConfirmation confirm = data
+                        .getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                if (confirm != null) {
+                    try {
+                        Log.i("paymentExample", confirm.toJSONObject().toString(4));
+                        // TODO: need to test confirmation
+                        if (payfive.DEBUG)
+                            Log.d(TAG, "payment confirmation received");
 
-					// TODO: send 'confirm' to your server for verification.
-					// see
-					// https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
-					// for more details.
+                        // TODO: send 'confirm' to your server for verification.
+                        // see
+                        // https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
+                        // for more details.
 
-				} catch (JSONException e) {
-					Log.e("paymentExample",
-							"an extremely unlikely failure occurred: ", e);
-				}
-			}
-		} else if (resultCode == Activity.RESULT_CANCELED) {
-			Log.i("paymentExample", "The user canceled.");
-		} else if (resultCode == PaymentActivity.RESULT_PAYMENT_INVALID) {
-			Log.i("paymentExample",
-					"An invalid payment was submitted. Please see the docs.");
-		}
+                    } catch (JSONException e) {
+                        Log.e("paymentExample",
+                                "an extremely unlikely failure occurred: ", e);
+                    }
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                Log.i("paymentExample", "The user canceled.");
+            } else if (resultCode == PaymentActivity.RESULT_PAYMENT_INVALID) {
+                Log.i("paymentExample",
+                        "An invalid payment was submitted. Please see the docs.");
+            }
+        }
 	}
+
 
 	@Override
 	public void onDestroy() {
@@ -198,6 +213,8 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 					.show();
 			// TODO: Here make an intent to scan qr activity
 			// and launch activity for result
+            Intent intent = new Intent(getActivity(), ScanBarCodeActivity.class);
+            startActivityForResult(intent,REQUEST_CODE_SCANBARCODE);
 			
 			return true;
 
@@ -205,4 +222,6 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
+
 }
