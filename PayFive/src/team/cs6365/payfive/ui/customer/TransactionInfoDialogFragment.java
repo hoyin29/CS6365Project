@@ -6,19 +6,25 @@ import team.cs6365.payfive.model.Transaction;
 import team.cs6365.payfive.model.User;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class TransactionInfoDialogFragment extends DialogFragment {
+public class TransactionInfoDialogFragment extends DialogFragment implements
+		OnClickListener {
 
 	private TextView tvDate, tvAmount, tvType, tvPerson, tvDesc;
 	private Drawable drawableType;
 	private ImageView ivType;
+	private Button btnDelete, btnContact;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,7 +33,7 @@ public class TransactionInfoDialogFragment extends DialogFragment {
 				null);
 
 		setStyle(DialogFragment.STYLE_NORMAL, R.style.AlertDialogCustom);
-		
+
 		/* grab transaction object being passed in bundle */
 		Bundle b = getArguments();
 		Transaction current = (Transaction) b.getSerializable("Transaction");
@@ -40,6 +46,11 @@ public class TransactionInfoDialogFragment extends DialogFragment {
 		tvPerson = (TextView) view.findViewById(R.id.tv_person);
 		tvDesc = (TextView) view.findViewById(R.id.tv_desc);
 		ivType = (ImageView) view.findViewById(R.id.iv_type);
+		btnDelete = (Button) view.findViewById(R.id.btn_delete);
+		btnContact = (Button) view.findViewById(R.id.btn_contact);
+
+		btnDelete.setOnClickListener(this);
+		btnContact.setOnClickListener(this);
 
 		// if object is type of Transaction
 
@@ -73,6 +84,25 @@ public class TransactionInfoDialogFragment extends DialogFragment {
 		ivType.setImageDrawable(drawableType);
 
 		return view;
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+
+		case R.id.btn_delete:
+			// call delete method for database
+			Toast.makeText(getActivity(), "Deleting this transaction info",
+					Toast.LENGTH_SHORT).show();
+
+			break;
+		case R.id.btn_contact:
+			// grab contact from the transaction, call email client
+			Toast.makeText(getActivity(), "Contact this user",
+					Toast.LENGTH_SHORT).show();
+			break;
+
+		}
 	}
 
 }

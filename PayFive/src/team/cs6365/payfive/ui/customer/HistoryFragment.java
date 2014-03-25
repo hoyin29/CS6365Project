@@ -46,10 +46,10 @@ public class HistoryFragment extends Fragment implements
 		getActivity().setTitle("History");
 
 		lvHistory = (ListView) rootView.findViewById(R.id.lv_menu_items);
+		lvHistory.setEmptyView(rootView.findViewById(android.R.id.empty));
 
 		mAdapter = new HistoryAdapter(getActivity());
 
-		lvHistory.setAdapter(mAdapter);
 		lvHistory.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
@@ -105,6 +105,7 @@ public class HistoryFragment extends Fragment implements
 		list.add(t2);
 
 		mAdapter.setItems(list);
+		lvHistory.setAdapter(mAdapter);
 
 		return rootView;
 	}
