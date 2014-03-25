@@ -25,6 +25,7 @@ public class TransactionInfoDialogFragment extends DialogFragment implements
 	private Drawable drawableType;
 	private ImageView ivType;
 	private Button btnDelete, btnContact;
+	private Transaction current;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +37,7 @@ public class TransactionInfoDialogFragment extends DialogFragment implements
 
 		/* grab transaction object being passed in bundle */
 		Bundle b = getArguments();
-		Transaction current = (Transaction) b.getSerializable("Transaction");
+		current = (Transaction) b.getSerializable("Transaction");
 
 		getDialog().setTitle("Transaction Info");
 
@@ -98,8 +99,25 @@ public class TransactionInfoDialogFragment extends DialogFragment implements
 			break;
 		case R.id.btn_contact:
 			// grab contact from the transaction, call email client
-			Toast.makeText(getActivity(), "Contact this user",
-					Toast.LENGTH_SHORT).show();
+			String email = "";
+			String msg = "";
+
+			if (current.isSendType()) {
+				if (current.getRecipient() != null) {
+					msg = "Contacting the recipient by email: ";
+					email = current.getRecipient().getPaypalId();
+				}
+			} else {
+				if (current.getSender() != null) {
+					msg = "Contacting sender by email: ";
+					email = current.getSender().getPaypalId();
+				}
+			}
+
+			// TODO: bring email app with intent
+			Toast.makeText(getActivity(), msg + email, Toast.LENGTH_SHORT)
+					.show();
+
 			break;
 
 		}

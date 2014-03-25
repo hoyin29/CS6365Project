@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_date"
-            android:layout_marginRight="14dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/lbl_currency"
             android:minWidth="65dp"
@@ -51,7 +51,7 @@
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@id/tv_amount"
             android:text="Received from"
-            android:textSize="10sp" />
+            android:textSize="8sp" />
 
         <TextView
             android:id="@+id/tv_person"
@@ -61,7 +61,7 @@
             android:layout_toLeftOf="@id/iv_thumbnail"
             android:layout_toRightOf="@id/tv_amount"
             android:text="George P. Burdell"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/iv_type"
@@ -108,7 +108,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@color/theme_bg"
-            android:text="Contact this person"
+            android:text="Contact via email"
             android:textColor="#EEE"
             android:textSize="12sp" />
     </LinearLayout>

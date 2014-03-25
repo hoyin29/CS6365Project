@@ -79,7 +79,7 @@ public class HistoryFragment extends Fragment implements
 		List<Transaction> list = new ArrayList<Transaction>();
 
 		Transaction t = new Transaction();
-		User u = new User("JK");
+		User u = new User("JK", "jk@test.com");
 		t.setRecipient(u);
 		t.setSendType(true);
 		t.setAmount(11.99);
@@ -90,14 +90,14 @@ public class HistoryFragment extends Fragment implements
 		t1.setDate("2/2/2012");
 		t1.setAmount(12.59);
 		t1.setDesc("Split pizza with George P. Burdell");
-		t1.setRecipient(new User("JK"));
+		t1.setRecipient(new User("Jin", "jin@gatech"));
 		t1.setSendType(true);
 
 		Transaction t2 = new Transaction();
 		t2.setDate("3/24/2014");
 		t2.setAmount(3);
 		t2.setDesc("Lunch money return");
-		t2.setSender(new User("SG"));
+		t2.setSender(new User("SG", "a@b.c"));
 		t2.setSendType(false);
 
 		list.add(t);
