@@ -3,6 +3,7 @@ package team.cs6365.payfive.ui.customer;
 import java.util.ArrayList;
 import java.util.List;
 
+import team.cs6365.payfive.PayFive;
 import team.cs6365.payfive.R;
 import team.cs6365.payfive.model.MenuItem;
 import team.cs6365.payfive.model.Transaction;
@@ -26,6 +27,10 @@ public class HistoryAdapter extends BaseAdapter {
 	private Context ctx;
 	private List<Transaction> items;
 
+	private TextView tvDate, tvAmount, tvType, tvPerson;
+	private ImageView ivType;
+	private Drawable drawableType;
+
 	public HistoryAdapter(Context ctx) {
 		this.ctx = ctx;
 		mInflater = (LayoutInflater) ctx
@@ -46,35 +51,31 @@ public class HistoryAdapter extends BaseAdapter {
 		Transaction current = items.get(position);
 		if (current != null) {
 
-			((TextView) view.findViewById(R.id.tv_desc)).setText(current
-					.getDesc());
-			((TextView) view.findViewById(R.id.tv_amount)).setText(String
-					.valueOf(current.getAmount()));
+			tvDate = (TextView) view.findViewById(R.id.tv_date);
+			tvAmount = (TextView) view.findViewById(R.id.tv_amount);
+			tvType = (TextView) view.findViewById(R.id.tv_type);
+			tvPerson = (TextView) view.findViewById(R.id.tv_person);
+			ivType = (ImageView) view.findViewById(R.id.iv_type);
 
-			// TODO: ((TextView)
-			// view.findViewById(R.id.tv_date)).setText(current
-			// .getDate());
-			Drawable thumbnail;
 			String fromTo = "";
 
+			tvDate.setText(current.getDate());
+			tvAmount.setText(String.valueOf(current.getAmount()));
 			if (current.isSendType()) {
 				// if sending transaction
-				thumbnail = ctx.getResources().getDrawable(R.drawable.send);
-				((TextView) view.findViewById(R.id.tv_type)).setText("sent to");
-				// TODO fromTo = current.getRecipient().getName();
+				drawableType = PayFive.getContext().getResources()
+						.getDrawable(R.drawable.send);
+				tvType.setText("sent to");
+				tvPerson.setText(current.getRecipient().getName());
 			} else {
 				// if receiving transaction
-				thumbnail = ctx.getResources().getDrawable(R.drawable.recv);
-				((TextView) view.findViewById(R.id.tv_type))
-						.setText("received from");
-				// TODO fromTo = current.getSender().getName();
+				drawableType = PayFive.getContext().getResources()
+						.getDrawable(R.drawable.recv);
+				tvType.setText("received from");
+				tvPerson.setText(current.getSender().getName());
 			}
+			ivType.setImageDrawable(drawableType);
 
-			((ImageView) view.findViewById(R.id.iv_thumbnail))
-					.setImageDrawable(thumbnail);
-			// TODO
-			((TextView) view.findViewById(R.id.tv_person))
-					.setText("George P. Burdell");
 		}
 
 		return view;

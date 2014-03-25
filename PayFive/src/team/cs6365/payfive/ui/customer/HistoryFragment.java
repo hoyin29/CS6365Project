@@ -7,7 +7,10 @@ import team.cs6365.payfive.model.MenuItem;
 import team.cs6365.payfive.model.Transaction;
 import team.cs6365.payfive.model.User;
 import team.cs6365.payfive.ui.loader.MenuItemLoader;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -16,6 +19,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -45,21 +50,57 @@ public class HistoryFragment extends Fragment implements
 		mAdapter = new HistoryAdapter(getActivity());
 
 		lvHistory.setAdapter(mAdapter);
+		lvHistory.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// new transaction info dialog fragment
+
+				TransactionInfoDialogFragment dFrag = new TransactionInfoDialogFragment();
+
+				// attach the selected Transaction object in bundle
+				Bundle b = new Bundle();
+				Transaction selected = mAdapter.getItem(position);
+				b.putSerializable("Transaction", selected);
+				dFrag.setArguments(b);
+
+				/* Search for dialog that exists from before */
+				FragmentManager fragmentManager = getFragmentManager();
+				FragmentTransaction fragmentTransaction = fragmentManager
+						.beginTransaction();
+				TransactionInfoDialogFragment tPrev = (TransactionInfoDialogFragment) fragmentManager
+						.findFragmentByTag("transaction_info_dialog");
+				if (tPrev != null) // if exists, remove it first
+					fragmentTransaction.remove(tPrev);
+				// show dialog
+				dFrag.show(fragmentTransaction, "transaction_info_dialog");
+			}
+		});
 
 		List<Transaction> list = new ArrayList<Transaction>();
 
+		Transaction t = new Transaction();
+		User u = new User("JK");
+		t.setRecipient(u);
+		t.setSendType(true);
+		t.setAmount(11.99);
+		t.setDate("1/1/2014");
+		t.setDesc("We ordered pizza.\nDave paid.\nI'm paying him back for my portion\nK.Thx.Bye.");
+
 		Transaction t1 = new Transaction();
+		t1.setDate("2/2/2012");
 		t1.setAmount(12.59);
 		t1.setDesc("Split pizza with George P. Burdell");
-		// t1.setSender(new User("JK"));
+		t1.setRecipient(new User("JK"));
 		t1.setSendType(true);
 
 		Transaction t2 = new Transaction();
+		t2.setDate("3/24/2014");
 		t2.setAmount(3);
 		t2.setDesc("Lunch money return");
-		// t1.setSender(new User("JK"));
+		t2.setSender(new User("SG"));
 		t2.setSendType(false);
 
+		list.add(t);
 		list.add(t1);
 		list.add(t2);
 

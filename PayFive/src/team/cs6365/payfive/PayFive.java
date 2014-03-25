@@ -1,8 +1,11 @@
 package team.cs6365.payfive;
 
 import android.app.Application;
+import android.content.Context;
 
 public class PayFive extends Application {
+
+	private static Context context;
 
 	/* Development */
 	public static final boolean DEBUG = true;
@@ -17,5 +20,17 @@ public class PayFive extends Application {
 	public static final String CLIENT_SECRET = "EHbkvBAp6lWLJLB1fr0lhDxBEBaFZX-Bms9TwIl3pa1th2tVMjfr5Pk48bor";
 
 	public static final String ACCESS_DENIED = "access_denied";
+
+	/* ~~~~ METHODS ~~~~ */
+	public void onCreate() {
+		super.onCreate();
+		// set context
+		PayFive.context = getApplicationContext();
+	}
+
+	/* method for global static context */
+	public static Context getContext() {
+		return PayFive.context;
+	}
 
 }

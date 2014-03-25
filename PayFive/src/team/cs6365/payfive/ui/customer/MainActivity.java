@@ -29,6 +29,7 @@ package team.cs6365.payfive.ui.customer;
 
 import java.util.Locale;
 
+import team.cs6365.payfive.PayFive;
 import team.cs6365.payfive.R;
 import team.cs6365.payfive.R.array;
 import team.cs6365.payfive.R.drawable;
@@ -110,20 +111,20 @@ public class MainActivity extends Activity {
 	private final int HISTORY = 2;
 	private final int DRAWER_ABOUT = 3;
 
-	private Application payfive;
+	protected PayFive payfive;
 
-    static String email="";
-    static String name="";
-    static String phone="";
+	static String email = "";
+	static String name = "";
+	static String phone = "";
 
-    static boolean isLoggedIn =false;
+	static boolean isLoggedIn = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		payfive = getApplication();
+		payfive = (PayFive) this.getApplication();
 
 		mTitle = mDrawerTitle = getTitle();
 		mDrawerMenus = getResources().getStringArray(R.array.drawer_menu);
@@ -275,7 +276,5 @@ public class MainActivity extends Activity {
 		// Pass any configuration change to the drawer toggls
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
-
-
 
 }
