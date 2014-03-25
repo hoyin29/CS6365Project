@@ -26,6 +26,8 @@ public class TransactionInfoDialogFragment extends DialogFragment {
 		View view = inflater.inflate(R.layout.frag_transaction_info_dialog,
 				null);
 
+		setStyle(DialogFragment.STYLE_NORMAL, R.style.AlertDialogCustom);
+		
 		/* grab transaction object being passed in bundle */
 		Bundle b = getArguments();
 		Transaction current = (Transaction) b.getSerializable("Transaction");
