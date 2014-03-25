@@ -13,6 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
@@ -25,11 +26,10 @@
         android:padding="10dp" >
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/tv_scan_status"
+            style="@style/subtitle"
             android:layout_marginBottom="20dp"
-            android:text="Transaction Info"
-            android:textSize="20sp" />
+            android:text="Scan QR code by clicking the icon on the top right" />
 
         <TextView
             style="@style/label"
@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/txtAmount"
             style="@style/content"
-            android:text="$6.50"
+            android:text="-"
             android:textSize="20sp" />
 
         <TextView
@@ -48,9 +48,9 @@
             android:text="To" />
 
         <TextView
-                android:id="@+id/txtName"
+            android:id="@+id/txtName"
             style="@style/content"
-            android:text="John"
+            android:text="-"
             android:textSize="20sp" />
 
         <TextView
@@ -59,9 +59,9 @@
             android:text="For" />
 
         <TextView
-                android:id="@+id/txtDescription"
+            android:id="@+id/txtDescription"
             style="@style/content"
-            android:text="Split pizza with George"
+            android:text="-"
             android:textSize="16sp" />
 
         <Button

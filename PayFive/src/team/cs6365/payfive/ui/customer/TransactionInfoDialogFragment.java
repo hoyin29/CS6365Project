@@ -95,8 +95,8 @@ public class TransactionInfoDialogFragment extends DialogFragment implements
 			// call delete method for database
 			Toast.makeText(getActivity(), "Deleting this transaction info",
 					Toast.LENGTH_SHORT).show();
-
 			break;
+
 		case R.id.btn_contact:
 			// grab contact from the transaction, call email client
 			String email = "";
@@ -117,7 +117,6 @@ public class TransactionInfoDialogFragment extends DialogFragment implements
 			// TODO: bring email app with intent
 			Toast.makeText(getActivity(), msg + email, Toast.LENGTH_SHORT)
 					.show();
-
 			break;
 
 		}
