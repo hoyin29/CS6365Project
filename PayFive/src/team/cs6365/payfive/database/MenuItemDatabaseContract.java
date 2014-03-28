@@ -10,6 +10,7 @@ public abstract class MenuItemDatabaseContract implements BaseColumns
     public static final String COLUMN_NAME_DESCRIPTION = "description";
     public static final String COLUMN_NAME_PRICE = "price";
     public static final String COLUMN_NAME_THUMBNAIL = "thumbnail";
+    public static final String COLUMN_NAME_VISIBLE = "visible";
     
     private MenuItemDatabaseContract()
     {

@@ -7,7 +7,7 @@ public class Transaction implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private long id;
-	private List<MenuItem> items;
+	private List<Item> items;
 	private User recipient;
 	private User sender;
 	private double amount;
@@ -19,7 +19,7 @@ public class Transaction implements Serializable {
 		this(0, null, null, null, 0.0, null, null, true);
 	}
 
-	public Transaction(long id, List<MenuItem> items, User recipient,
+	public Transaction(long id, List<Item> items, User recipient,
 			User sender, double amount, String date, String desc,
 			boolean sendType) {
 		this.id = id;
@@ -40,11 +40,11 @@ public class Transaction implements Serializable {
 		this.id = id;
 	}
 
-	public List<MenuItem> getItems() {
+	public List<Item> getItems() {
 		return items;
 	}
 
-	public void setItems(List<MenuItem> items) {
+	public void setItems(List<Item> items) {
 		this.items = items;
 	}
 

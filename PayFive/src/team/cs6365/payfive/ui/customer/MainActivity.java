@@ -37,6 +37,7 @@ import team.cs6365.payfive.R.id;
 import team.cs6365.payfive.R.layout;
 import team.cs6365.payfive.R.menu;
 import team.cs6365.payfive.R.string;
+import team.cs6365.payfive.admin.ItemMenuActivity;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Fragment;
@@ -110,7 +111,8 @@ public class MainActivity extends Activity {
 	private final int SCAN_TO_PAY = 1;
 	private final int HISTORY = 2;
 	private final int DRAWER_ABOUT = 3;
-
+	private final int ADMIN_ITEM_MENU = 4;
+	
 	protected PayFive payfive;
 
 	static String email = "";
@@ -235,7 +237,10 @@ public class MainActivity extends Activity {
 			fragmentManager.beginTransaction()
 					.replace(R.id.content_frame, aboutFragment).commit();
 			break;
-
+		case ADMIN_ITEM_MENU:
+			Intent intent = new Intent(this, ItemMenuActivity.class);
+			startActivity(intent);
+			break;
 		default:
 			Fragment defaultFragment = new NewTransactionFragment();
 

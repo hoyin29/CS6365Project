@@ -24,6 +24,7 @@
         <item>Scan to Pay</item>
         <item>History</item>
         <item>About</item>
+        <item>Admin Item Menu</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
@@ -31,8 +32,6 @@
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
     <string name="title_activity_admin">AdminActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_checkout">CheckoutActivity</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
@@ -44,6 +43,28 @@
     <string name="login_description">This enables the user to use his PayPal credentials to login. Thus he doesn\'t have to create yet another account and remember yet another password.</string>
     <string name="login_oauth">OAuth 2.0</string>
     <string name="login_openid">OpenID</string>
+    
+    <string name="hello_world">Hello World</string>
+    <string name="activity_item_menu">ItemMenuActivity</string>
+    <string name="activity_add_item">AddItemActivity</string>
+    <string name="activity_customer_view">CustomerViewActivity</string>
+    <string name="action_add">Add</string>
+    <string name="action_sort">Sort</string>
+    <string name="action_search">Search</string>
+    <string name="action_settings">Settings</string>
+    <string name="item_name">Name</string>
+    <string name="item_price">Price</string>
+    <string name="item_visibility">Show</string>
+    <string name="item_picture">Picture</string>
+    <string name="item_category">Category</string>
+    <string name="item_description">Description</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_save">Save</string>
+    <string name="menu_view">View</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_customer_view">Customer View</string>
+    
 
 
 </resources>

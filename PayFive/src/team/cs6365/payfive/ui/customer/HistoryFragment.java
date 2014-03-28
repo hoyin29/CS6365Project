@@ -3,10 +3,10 @@ package team.cs6365.payfive.ui.customer;
 import java.util.ArrayList;
 import java.util.List;
 import team.cs6365.payfive.R;
-import team.cs6365.payfive.model.MenuItem;
+import team.cs6365.payfive.model.Item;
 import team.cs6365.payfive.model.Transaction;
 import team.cs6365.payfive.model.User;
-import team.cs6365.payfive.ui.loader.MenuItemLoader;
+import team.cs6365.payfive.ui.loader.ItemLoader;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -30,7 +30,7 @@ import android.widget.Toast;
  * @author Jin
  */
 public class HistoryFragment extends Fragment implements
-		LoaderManager.LoaderCallbacks<List<MenuItem>> {
+		LoaderManager.LoaderCallbacks<List<Item>> {
 
 	private static final String TAG = "PayFive! - HistoryFragment";
 	private static final boolean DEBUG = true;
@@ -115,14 +115,14 @@ public class HistoryFragment extends Fragment implements
 	/**********************/
 
 	@Override
-	public Loader<List<MenuItem>> onCreateLoader(int arg0, Bundle arg1) {
+	public Loader<List<Item>> onCreateLoader(int arg0, Bundle arg1) {
 		if (DEBUG)
 			Log.i(TAG, "#_#_#_# onCreateLoader() called! #_#_#_#");
-		return new MenuItemLoader(getActivity());
+		return new ItemLoader(getActivity());
 	}
 
 	@Override
-	public void onLoadFinished(Loader<List<MenuItem>> arg0, List<MenuItem> arg1) {
+	public void onLoadFinished(Loader<List<Item>> arg0, List<Item> arg1) {
 		if (DEBUG)
 			Log.i(TAG, "#_#_#_# onLoadFinished() called! #_#_#_#");
 		/*
@@ -135,7 +135,7 @@ public class HistoryFragment extends Fragment implements
 	}
 
 	@Override
-	public void onLoaderReset(Loader<List<MenuItem>> arg0) {
+	public void onLoaderReset(Loader<List<Item>> arg0) {
 		if (DEBUG)
 			Log.i(TAG, "#_#_#_# onLoaderReset() called! #_#_#_#");
 		/*

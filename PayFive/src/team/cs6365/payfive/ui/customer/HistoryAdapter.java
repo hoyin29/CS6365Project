@@ -5,7 +5,7 @@ import java.util.List;
 
 import team.cs6365.payfive.PayFive;
 import team.cs6365.payfive.R;
-import team.cs6365.payfive.model.MenuItem;
+import team.cs6365.payfive.model.Item;
 import team.cs6365.payfive.model.Transaction;
 
 import android.content.Context;

@@ -13,10 +13,11 @@ public class MenuItemDatabaseHelper extends SQLiteOpenHelper
     		"CREATE TABLE " +  MenuItemDatabaseContract.TABLE_NAME + " (" + 
     		MenuItemDatabaseContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
     		MenuItemDatabaseContract.COLUMN_NAME_NAME + " TEXT NOT NULL, " +  
+    		MenuItemDatabaseContract.COLUMN_NAME_PRICE + " REAL NOT NULL, " +
     		MenuItemDatabaseContract.COLUMN_NAME_CATEGORY + " TEXT NOT NULL, " + 
     		MenuItemDatabaseContract.COLUMN_NAME_DESCRIPTION + " TEXT NOT NULL, " + 
-    		MenuItemDatabaseContract.COLUMN_NAME_PRICE + " REAL NOT NULL, " +
-    		MenuItemDatabaseContract.COLUMN_NAME_THUMBNAIL + " BLOB NOT NULL)";
+    		MenuItemDatabaseContract.COLUMN_NAME_THUMBNAIL + " BLOB NOT NULL, " + 
+    		MenuItemDatabaseContract.COLUMN_NAME_VISIBLE + " INTEGER NOT NULL)";
     
     public static final String SQL_DROP_MENUITEM_TABLE = 
     		 "DROP TABLE IF EXISTS " + MenuItemDatabaseContract.TABLE_NAME;

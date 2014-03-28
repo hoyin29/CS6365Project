@@ -3,21 +3,32 @@ package team.cs6365.payfive.model;
 import android.graphics.Bitmap;
 
 /* model object for menu item */
-public class MenuItem {
+public class Item {
 	private String name, category, description;
 	private double price;
 	private Bitmap thumbnail;
+	private boolean visible;
 
-	public MenuItem() {
-		this("", "", "", 0.0, null);
+	public Item() {
+		this("", 0.0, "", "", null);
 	}
 	
-	public MenuItem(String name, String category, String description, double price, Bitmap thumbnail) {
+	public Item(String name, double price, String category, String description, Bitmap thumbnail) {
 		this.name = name;
 		this.category = category;
 		this.description = description;
 		this.price = price;
 		this.thumbnail = thumbnail;
+		this.visible = false;
+	}
+	
+	public Item(String name, double price, String category, String description, Bitmap thumbnail, boolean visible) {
+		this.name = name;
+		this.category = category;
+		this.description = description;
+		this.price = price;
+		this.thumbnail = thumbnail;
+		this.visible = visible;
 	}
 
 	public String getName() {
@@ -58,5 +69,13 @@ public class MenuItem {
 
 	public void setThumbnail(Bitmap thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 }
