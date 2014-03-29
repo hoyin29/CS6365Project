@@ -1,8 +1,6 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lv_item_menu"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="team.cs6365.payfive.admin.ItemMenuActivity"
-    tools:ignore="MergeRootFrame" />
+    android:layout_height="match_parent" >
 
+</ListView>

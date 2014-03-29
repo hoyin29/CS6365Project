@@ -25,7 +25,7 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 	private boolean isCustomer;
 
 	public MenuItemArrayAdapter(Activity context, ArrayList<Item> values) {
-		super(context, R.layout.row, values);
+		super(context, R.layout.row_item, values);
 		this.context = context;
 		this.values = values;
 		if(context.getClass().getSimpleName().equals("CustomerViewActivity")) {
@@ -66,7 +66,7 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 		// reuse views
 		if (convertView == null) {
 			LayoutInflater inflater = context.getLayoutInflater();
-			view = inflater.inflate(R.layout.row, null);
+			view = inflater.inflate(R.layout.row_item, null);
 			
 			// configure view holder
 			final ViewHolder viewHolder = new ViewHolder();

@@ -17,7 +17,7 @@
         android:scaleType="fitCenter"
         android:gravity="center"
         android:focusable="false"
-        android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
+        android:src="@drawable/placeholder" />
 
     <TextView
         android:id="@+id/tvName"
