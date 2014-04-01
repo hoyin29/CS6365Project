@@ -59,4 +59,22 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <!-- LAYOUT -->
+
+    <style name="list_frag">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@color/lightgray_background</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="listview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">#FFF</item>
+        <item name="android:divider">@color/lightgray_background</item>
+        <item name="android:dividerHeight">6dp</item>
+    </style>
+
 </resources>

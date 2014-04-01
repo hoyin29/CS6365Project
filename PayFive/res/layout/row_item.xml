@@ -1,56 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="wrap_content"
+    android:background="#FFF"
+    android:padding="12dp" >
 
     <ImageView
         android:id="@+id/ivPic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginRight="14dp"
         android:adjustViewBounds="true"
-        android:maxHeight="50dp"
-        android:maxWidth="50dp"
-        android:scaleType="fitCenter"
-        android:gravity="center"
         android:focusable="false"
+        android:scaleType="fitCenter"
+        android:background="#EEE"
         android:src="@drawable/placeholder" />
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ivPic"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/ivPic"
-        android:text="@string/item_name"
-        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/ivPic"
         android:focusable="false"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="@string/item_name"
+        android:textColor="@color/theme_text"
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/tvPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvName"
-        android:layout_below="@+id/tvName"
-        android:text="@string/item_price"
-        android:gravity="center"
+        style="@style/subtitle"
+        android:layout_alignBottom="@id/ivPic"
+        android:layout_alignLeft="@id/tvName"
+        android:layout_below="@id/tvName"
         android:focusable="false"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ImageView
-        android:id="@+id/ivVisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tvPrice"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="22dp"
         android:gravity="center"
-        android:clickable="true"
-        android:src="@drawable/eye_off" />
-    
+        android:text="@string/item_price"
+        android:textSize="16sp" />
+
 </RelativeLayout>

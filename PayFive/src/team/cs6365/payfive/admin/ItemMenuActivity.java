@@ -1,18 +1,13 @@
 package team.cs6365.payfive.admin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 import team.cs6365.payfive.R;
 import team.cs6365.payfive.database.MenuItemDataSource;
 import team.cs6365.payfive.model.Item;
 
-import android.support.v4.app.Fragment;
-import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,21 +15,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.os.Build;
-
-//public class ItemMenuActivity extends ActionBarActivity {
 
 public class ItemMenuActivity extends Activity {
 
