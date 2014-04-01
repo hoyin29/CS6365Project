@@ -6,6 +6,7 @@ import java.util.Random;
 import team.cs6365.payfive.R;
 import team.cs6365.payfive.database.MenuItemDataSource;
 import team.cs6365.payfive.model.Item;
+import team.cs6365.payfive.util.ImageConversion;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -184,7 +185,7 @@ public class ItemMenuActivity extends Activity {
 		for (int i = 0; i < n; ++i) {
 			Log.d(TAG, "adding item" + i);
 			ds.addMenuItem("item" + i, r.nextDouble() * 10 + 1, "category" + i,
-					"description" + i, bmap);
+					"description" + i, ImageConversion.compressBitmap(bmap));
 		}
 		ds.close();
 	}
@@ -242,7 +243,8 @@ public class ItemMenuActivity extends Activity {
 		intent.putExtra("PRICE", String.valueOf(item.getPrice()));
 		intent.putExtra("CATEGORY", item.getCategory());
 		intent.putExtra("DESCRIPTION", item.getDescription());
-		intent.putExtra("THUMBNAIL", item.getThumbnail());
+		intent.putExtra("THUMBNAIL_BYTES", item.getThumbnailBytes());
+
 		return intent;
 	}
 
@@ -269,11 +271,14 @@ public class ItemMenuActivity extends Activity {
 		if (requestCode == MENU_ADD || requestCode == MENU_EDIT) {
 			if (resultCode == RESULT_OK) {
 				Log.d(TAG, "return from AddItemActivity with result");
-				Item res = new Item(intent.getStringExtra("NAME"),
-						Double.valueOf(intent.getStringExtra("PRICE")),
+				double valPrice = 0.0d;
+				if (!intent.getStringExtra("PRICE").equals("")) {
+					valPrice = Double.valueOf(intent.getStringExtra("PRICE"));
+				}
+				Item res = new Item(intent.getStringExtra("NAME"), valPrice,
 						intent.getStringExtra("CATEGORY"),
 						intent.getStringExtra("DESCRIPTION"),
-						(Bitmap) intent.getParcelableExtra("THUMBNAIL"));
+						intent.getByteArrayExtra("THUMBNAIL_BYTES"));
 
 				items.add(res);
 			} else {
@@ -294,4 +299,5 @@ public class ItemMenuActivity extends Activity {
 		 */
 		refreshListview();
 	}
+
 }

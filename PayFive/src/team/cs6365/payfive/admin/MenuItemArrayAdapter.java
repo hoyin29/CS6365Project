@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import team.cs6365.payfive.R;
 import team.cs6365.payfive.database.MenuItemDataSource;
 import team.cs6365.payfive.model.Item;
+import team.cs6365.payfive.util.ImageConversion;
 
 import android.app.Activity;
 import android.graphics.BitmapFactory;
@@ -108,7 +109,7 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 
 		final ViewHolder vh = (ViewHolder) view.getTag();
 		Item i = values.get(position);
-		vh.pic.setImageBitmap(i.getThumbnail());
+		vh.pic.setImageBitmap(ImageConversion.extractBitmap(i.getThumbnailBytes()));
 		vh.name.setText(i.getName());
 		vh.price.setText("$" + i.getPrice());
 		// vh.see = i.isVisible();

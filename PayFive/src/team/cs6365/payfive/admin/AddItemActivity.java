@@ -1,7 +1,10 @@
 package team.cs6365.payfive.admin;
 
+import java.io.ByteArrayOutputStream;
+
 import team.cs6365.payfive.database.MenuItemDataSource;
 import team.cs6365.payfive.model.Item;
+import team.cs6365.payfive.util.ImageConversion;
 
 import team.cs6365.payfive.R;
 import android.app.Activity;
@@ -28,7 +31,7 @@ public class AddItemActivity extends Activity {
 	private static final String TAG = "***ADD";
 	private EditText name, cate, desc, price;
 	private Button pic, cancel, save;
-	private Bitmap thumbnail;
+	private byte[] thumbnailBytes;
 	private Item selected, updated;
 	private boolean isEdit;
 	private Intent result;
@@ -51,8 +54,9 @@ public class AddItemActivity extends Activity {
 		cate = (EditText) findViewById(R.id.etCategory);
 		desc = (EditText) findViewById(R.id.etDescription);
 		price = (EditText) findViewById(R.id.etPrice);
-		thumbnail = BitmapFactory.decodeResource(getResources(),
+		Bitmap bmp = BitmapFactory.decodeResource(getResources(),
 				R.drawable.placeholder);
+		thumbnailBytes = ImageConversion.compressBitmap(bmp);
 
 		pic = (Button) findViewById(R.id.bPicture);
 		pic.setOnClickListener(new OnClickListener() {
@@ -94,19 +98,22 @@ public class AddItemActivity extends Activity {
 		int menuType = intent.getIntExtra("MENU", 1);
 		if (menuType == 2 || menuType == 1) {
 			Log.d(TAG, "this activity was triggered by edit");
+			this.getActionBar().setTitle("Edit Item");
 			isEdit = true;
 			name.setText(intent.getStringExtra("NAME"));
 			price.setText(intent.getStringExtra("PRICE"));
 			cate.setText(intent.getStringExtra("CATEGORY"));
 			desc.setText(intent.getStringExtra("DESCRIPTION"));
-			thumbnail = intent.getParcelableExtra("THUMBNAIL");
+
+			// thumbnail = intent.getParcelableExtra("THUMBNAIL");
 
 			selected = new Item(name.getText().toString(), Double.valueOf(price
 					.getText().toString()), cate.getText().toString(), desc
-					.getText().toString(), thumbnail);
+					.getText().toString(), thumbnailBytes);
 
 			if (menuType == 1) {
 				Log.d(TAG, "this activity was triggered by view");
+				this.getActionBar().setTitle("View Item");
 				name.setEnabled(false);
 				price.setEnabled(false);
 				cate.setEnabled(false);
@@ -117,6 +124,7 @@ public class AddItemActivity extends Activity {
 			}
 		} else if (menuType == 0) {
 			Log.d(TAG, "this activity was triggered by add");
+			this.getActionBar().setTitle("Add Item");
 		}
 	}
 
@@ -162,7 +170,7 @@ public class AddItemActivity extends Activity {
 			Log.d(TAG, "saving edit");
 			updated = new Item(name.getText().toString(), Double.valueOf(price
 					.getText().toString()), cate.getText().toString(), desc
-					.getText().toString(), thumbnail);
+					.getText().toString(), thumbnailBytes);
 			ds.updateMenuItem(selected, updated);
 
 			result = new Intent();
@@ -170,7 +178,7 @@ public class AddItemActivity extends Activity {
 			result.putExtra("PRICE", String.valueOf(updated.getPrice()));
 			result.putExtra("CATEGORY", updated.getCategory());
 			result.putExtra("DESCRIPTION", updated.getDescription());
-			result.putExtra("THUMBNAIL", updated.getThumbnail());
+			result.putExtra("THUMBNAIL_BYTES", updated.getThumbnailBytes());
 		} else {
 			Log.d(TAG, "saving add");
 
@@ -183,14 +191,16 @@ public class AddItemActivity extends Activity {
 			valDesc = desc.getText().toString();
 
 			/* save */
-			ds.addMenuItem(valName, valPrice, valCategory, valDesc, thumbnail);
+			ds.addMenuItem(valName, valPrice, valCategory, valDesc,
+					thumbnailBytes);
 
 			result = new Intent();
 			result.putExtra("NAME", name.getText().toString());
 			result.putExtra("PRICE", price.getText().toString());
 			result.putExtra("CATEGORY", cate.getText().toString());
 			result.putExtra("DESCRIPTION", desc.getText().toString());
-			result.putExtra("THUMBNAIL", thumbnail);
+
+			result.putExtra("THUMBNAIL_BYTES", thumbnailBytes);
 		}
 
 		ds.close();
