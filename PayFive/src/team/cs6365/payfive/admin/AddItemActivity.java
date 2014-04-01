@@ -32,50 +32,56 @@ public class AddItemActivity extends Activity {
 	private Item selected, updated;
 	private boolean isEdit;
 	private Intent result;
-	
+
+	private Double valPrice = 0.0d;
+	private String valName = "", valDesc = "", valCategory = "";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_item);
-		
+
 		/*
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
-		*/
-		
-		name = (EditText) findViewById(R.id.etName);
+		 * if (savedInstanceState == null) {
+		 * getFragmentManager().beginTransaction() .add(R.id.container, new
+		 * PlaceholderFragment()).commit(); }
+		 */
+
+		name = (EditText) findViewById(R.id.et_item_name);
 		cate = (EditText) findViewById(R.id.etCategory);
 		desc = (EditText) findViewById(R.id.etDescription);
 		price = (EditText) findViewById(R.id.etPrice);
-		thumbnail = BitmapFactory.decodeResource(getResources(), R.drawable.placeholder);
-		
+		thumbnail = BitmapFactory.decodeResource(getResources(),
+				R.drawable.placeholder);
+
 		pic = (Button) findViewById(R.id.bPicture);
 		pic.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(v.getContext(), "select pic from gallery", Toast.LENGTH_LONG).show();
+				Toast.makeText(v.getContext(), "select pic from gallery",
+						Toast.LENGTH_LONG).show();
 			}
 		});
-		
+
 		cancel = (Button) findViewById(R.id.bCancel);
 		cancel.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(v.getContext(), "no new item added", Toast.LENGTH_LONG).show();
+				Toast.makeText(v.getContext(), "no new item added",
+						Toast.LENGTH_LONG).show();
 				finish();
 			}
 		});
-		
+
 		save = (Button) findViewById(R.id.bSave);
 		save.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(v.getContext(), "saving this new item", Toast.LENGTH_LONG).show();
+				Toast.makeText(v.getContext(), "saving this new item",
+						Toast.LENGTH_LONG).show();
 				save();
 				setResult(Activity.RESULT_OK, result);
 				Log.d(TAG, "sending result back to main activity");
@@ -83,10 +89,10 @@ public class AddItemActivity extends Activity {
 				Log.d(TAG, "finish AddItemActivitiy");
 			}
 		});
-		
+
 		Intent intent = getIntent();
 		int menuType = intent.getIntExtra("MENU", 1);
-		if(menuType == 2 || menuType == 1) {
+		if (menuType == 2 || menuType == 1) {
 			Log.d(TAG, "this activity was triggered by edit");
 			isEdit = true;
 			name.setText(intent.getStringExtra("NAME"));
@@ -94,14 +100,12 @@ public class AddItemActivity extends Activity {
 			cate.setText(intent.getStringExtra("CATEGORY"));
 			desc.setText(intent.getStringExtra("DESCRIPTION"));
 			thumbnail = intent.getParcelableExtra("THUMBNAIL");
-			
-			selected = new Item(name.getText().toString(),
-					Double.valueOf(price.getText().toString()),
-					cate.getText().toString(),
-					desc.getText().toString(),
-					thumbnail);
-			
-			if(menuType == 1) {
+
+			selected = new Item(name.getText().toString(), Double.valueOf(price
+					.getText().toString()), cate.getText().toString(), desc
+					.getText().toString(), thumbnail);
+
+			if (menuType == 1) {
 				Log.d(TAG, "this activity was triggered by view");
 				name.setEnabled(false);
 				price.setEnabled(false);
@@ -111,9 +115,9 @@ public class AddItemActivity extends Activity {
 				save.setVisibility(View.GONE);
 				cancel.setVisibility(View.GONE);
 			}
-		} else if(menuType == 0){
+		} else if (menuType == 0) {
 			Log.d(TAG, "this activity was triggered by add");
-		} 
+		}
 	}
 
 	@Override
@@ -140,56 +144,55 @@ public class AddItemActivity extends Activity {
 	 * A placeholder fragment containing a simple view.
 	 */
 	/*
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_add_item,
-					container, false);
-			return rootView;
-		}
-	}	
-	*/
+	 * public static class PlaceholderFragment extends Fragment {
+	 * 
+	 * public PlaceholderFragment() { }
+	 * 
+	 * @Override public View onCreateView(LayoutInflater inflater, ViewGroup
+	 * container, Bundle savedInstanceState) { View rootView =
+	 * inflater.inflate(R.layout.fragment_add_item, container, false); return
+	 * rootView; } }
+	 */
 
 	private void save() {
 		MenuItemDataSource ds = new MenuItemDataSource(this);
 		ds.open();
-		
-		if(isEdit) {
+
+		if (isEdit) {
 			Log.d(TAG, "saving edit");
-			updated = new Item(name.getText().toString(),
-					Double.valueOf(price.getText().toString()),
-					cate.getText().toString(),
-					desc.getText().toString(),
-					thumbnail);
+			updated = new Item(name.getText().toString(), Double.valueOf(price
+					.getText().toString()), cate.getText().toString(), desc
+					.getText().toString(), thumbnail);
 			ds.updateMenuItem(selected, updated);
-			
+
 			result = new Intent();
 			result.putExtra("NAME", updated.getName());
 			result.putExtra("PRICE", String.valueOf(updated.getPrice()));
 			result.putExtra("CATEGORY", updated.getCategory());
-			result.putExtra("DESCRIPTION",updated.getDescription());
+			result.putExtra("DESCRIPTION", updated.getDescription());
 			result.putExtra("THUMBNAIL", updated.getThumbnail());
 		} else {
 			Log.d(TAG, "saving add");
-			ds.addMenuItem(name.getText().toString(),
-					Double.valueOf(price.getText().toString()),
-					cate.getText().toString(),
-					desc.getText().toString(),
-					thumbnail);
-			
+
+			/* grab values from view */
+			if (!price.getText().toString().equals("")) {
+				valPrice = Double.valueOf(price.getText().toString());
+			}
+			valName = name.getText().toString();
+			valCategory = cate.getText().toString();
+			valDesc = desc.getText().toString();
+
+			/* save */
+			ds.addMenuItem(valName, valPrice, valCategory, valDesc, thumbnail);
+
 			result = new Intent();
 			result.putExtra("NAME", name.getText().toString());
 			result.putExtra("PRICE", price.getText().toString());
 			result.putExtra("CATEGORY", cate.getText().toString());
-			result.putExtra("DESCRIPTION",desc.getText().toString());
+			result.putExtra("DESCRIPTION", desc.getText().toString());
 			result.putExtra("THUMBNAIL", thumbnail);
 		}
-		
+
 		ds.close();
 	}
 }

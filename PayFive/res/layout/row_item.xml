@@ -15,7 +15,6 @@
         android:adjustViewBounds="true"
         android:focusable="false"
         android:scaleType="fitCenter"
-        android:background="#EEE"
         android:src="@drawable/placeholder" />
 
     <TextView
