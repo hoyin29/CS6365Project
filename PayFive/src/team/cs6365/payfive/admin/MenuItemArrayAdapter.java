@@ -8,6 +8,7 @@ import team.cs6365.payfive.model.Item;
 
 import android.app.Activity;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -129,8 +130,13 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 		} else {
 			Log.d(TAG, "picPath is not empty");
 
+			Log.d(TAG, "picPath: " + i.getThumbnail());
 			// vh.pic.setImageBitmap(BitmapFactory.decodeFile(i.getThumbnail()));
-			vh.pic.setImageURI(Uri.parse(i.getThumbnail()));
+			//vh.pic.setImageURI(Uri.parse(i.getThumbnail())); this works
+			
+			int imageResource = context.getResources().getIdentifier(i.getThumbnail(), null, context.getPackageName());
+			Drawable res = context.getResources().getDrawable(imageResource);
+			vh.pic.setImageDrawable(res);
 		}
 
 		lp = vh.pic.getLayoutParams();

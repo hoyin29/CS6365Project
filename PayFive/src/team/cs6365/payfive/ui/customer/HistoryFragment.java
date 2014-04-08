@@ -34,7 +34,30 @@ public class HistoryFragment extends Fragment {
 	private ListView lvHistory;
 	private Activity act;
 	private List<Transaction> list;
-
+	private String[] desc = {
+		"Pizza Hut cost split",
+		"public grocery cost split",
+		"sushi at lunch with friends",
+		"bar bill",
+		"Bento food truck bill",
+		"chinese food night!!!",
+		"new korean restaurant dinner!!"
+	};
+	
+	private String[] send = {
+		"Sehoon",
+		"Hoyin",
+		"Kelly",
+		"Emily"
+	};
+	
+	private String[] recv = {
+		"Jin",	
+		"David",
+		"Bryan",
+		"Rachel"
+	};
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -95,7 +118,7 @@ public class HistoryFragment extends Fragment {
 		 */
 
 		act = getActivity();
-		createTransactions(10); // for real code, just load history db to list
+		createTransactions(7); // for real code, just load history db to list
 
 		mAdapter.setItems(list);
 		lvHistory.setAdapter(mAdapter);
@@ -115,9 +138,9 @@ public class HistoryFragment extends Fragment {
 					"description" + i, ""));
 			// Log.d(TAG, "size: " + l.size());
 			// Log.d(TAG, "before: " + l.get(0).getName());
-			Transaction t = new Transaction(i, l, new User("Jin", "123"),
-					new User("Sehoon", "456"), r.nextDouble() * 10 + 1, "",
-					"description" + i, r.nextBoolean());
+			Transaction t = new Transaction(i, l, new User(recv[r.nextInt(recv.length)], "123"),
+					new User(send[r.nextInt(send.length)], "456"), r.nextDouble() * 10 + 10, "",
+					desc[r.nextInt(desc.length)], r.nextBoolean());
 			// Log.d(TAG, "after: " + t.getItems().get(0).getName());
 			tds.addTransaction(t);
 
