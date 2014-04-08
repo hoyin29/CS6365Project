@@ -38,6 +38,7 @@ public class CustomerViewFragment extends Fragment {
 		ctx.setTitle("Customer View");
 
 		listview = (ListView) rootView.findViewById(R.id.listview);
+		listview.setEmptyView(rootView.findViewById(android.R.id.empty));
 		items = new ArrayList<Item>();
 
 		adapter = new MenuItemArrayAdapter(ctx, items);
