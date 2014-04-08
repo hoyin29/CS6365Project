@@ -1,6 +1,8 @@
 package team.cs6365.payfive.ui.customer;
 
 import android.widget.*;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PaymentActivity;
 import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
 import org.json.JSONException;
@@ -20,6 +22,13 @@ import android.view.ViewGroup;
 import team.cs6365.payfive.model.Item;
 import team.cs6365.payfive.model.Serializer;
 import team.cs6365.payfive.util.AccessHelperConnect;
+
+import java.math.BigDecimal;
+
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 /**
  * ViewCartFragment shows items currently in the cart for the current customer.
@@ -45,6 +54,14 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
     private static final String MY_CARDIO_APP_TOKEN = "5937a8aff29748b483b94279c2b690a9";
     private int REQUEST_CODE_SCAN = 3; // arbitrary int
     private int REQUEST_CODE_PAY_WITH_CARD = 4;
+
+    private static final String CONFIG_ENVIRONMENT = PaymentActivity.ENVIRONMENT_SANDBOX;
+
+    // note that these credentials will differ between live & sandbox environments.
+    private static final String CONFIG_CLIENT_ID = "AXMkqxCO-osYaQqqk3Q3IU1q9ZnDwywVuzCdr4eXKlBceyCdr6Q1mpKxMzeB";
+    // when testing in sandbox, this is likely the -facilitator email address.
+    private static final String CONFIG_RECEIVER_EMAIL = "ppsandbox6911@gmail.com";
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -117,11 +134,41 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
                 startActivity(intent);
                 break;
             case R.id.btn_scan:
-                onScanCardPressed();
+                onBuyPressed();
                 break;
 
 		}
 	}
+
+    public void onBuyPressed() {
+        boolean clear = true;
+        if(etAmount.getText().toString().equals("")){
+            clear=false;
+            Toast.makeText(getActivity(),"Please specify the Amount", Toast.LENGTH_SHORT).show();
+        }
+        else if(etAmount.getText().toString().equals("")){
+            clear=false;
+            Toast.makeText(getActivity(),"Please fill out description", Toast.LENGTH_SHORT).show();
+        }
+
+        if(clear){
+            PayPalPayment thingToBuy = new PayPalPayment(new BigDecimal(etAmount.getText().toString()), "USD", etDescription.getText().toString());
+
+            Intent intent = new Intent(getActivity(), PaymentActivity.class);
+
+            intent.putExtra(PaymentActivity.EXTRA_PAYPAL_ENVIRONMENT, CONFIG_ENVIRONMENT);
+            intent.putExtra(PaymentActivity.EXTRA_CLIENT_ID, CONFIG_CLIENT_ID);
+            intent.putExtra(PaymentActivity.EXTRA_RECEIVER_EMAIL, MainActivity.email);
+
+            // It's important to repeat the clientId here so that the SDK has it if Android restarts your
+            // app midway through the payment UI flow.
+            intent.putExtra(PaymentActivity.EXTRA_CLIENT_ID, CONFIG_CLIENT_ID);
+            intent.putExtra(PaymentActivity.EXTRA_PAYER_ID, MainActivity.email);
+            intent.putExtra(PaymentActivity.EXTRA_PAYMENT, thingToBuy);
+
+            startActivityForResult(intent, 0);
+        }
+    }
 
     private void onScanCardPressed(){
 
