@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
@@ -5,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context="team.cs6365.payfive.admin.ItemMenuFragment"
     tools:ignore="MergeRootFrame" />
+=======
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/list_frag" >
+>>>>>>> 706c59efba5c68aa10a162d2e08dd9cba5f78a09
 
+    <ListView
+        android:id="@+id/lv_item_menu"
+        style="@style/listview" />
+
+</LinearLayout>

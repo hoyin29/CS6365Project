@@ -55,7 +55,7 @@
     <string name="item_name">Name</string>
     <string name="item_price">Price</string>
     <string name="item_visibility">Show</string>
-    <string name="item_picture">Picture</string>
+    <string name="item_picture">Add Picture</string>
     <string name="item_category">Category</string>
     <string name="item_description">Description</string>
     <string name="button_cancel">Cancel</string>

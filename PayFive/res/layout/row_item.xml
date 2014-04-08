@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFF"
+    android:padding="12dp" >
+
+    <ImageView
+        android:id="@+id/ivPic"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="14dp"
+        android:adjustViewBounds="true"
+        android:focusable="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/placeholder" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/ivPic"
+        android:focusable="false"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="@string/item_name"
+        android:textColor="@color/theme_text"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        style="@style/subtitle"
+        android:layout_alignBottom="@id/ivPic"
+        android:layout_alignLeft="@id/tvName"
+        android:layout_below="@id/tvName"
+        android:focusable="false"
+        android:gravity="center"
+        android:text="@string/item_price"
+        android:textSize="16sp" />
+
+</RelativeLayout>
