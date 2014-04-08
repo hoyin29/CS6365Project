@@ -1,6 +1,8 @@
 package team.cs6365.payfive.ui.customer;
 
 import android.widget.*;
+import io.card.payment.CardIOActivity;
+import io.card.payment.CreditCard;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,9 +35,14 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
 	private PayFive payfive;
 
     private Button btnGenQR;
+    private Button btnScanSendersCard;
 
     private EditText etDescription;
     private EditText etAmount;
+
+    private static final String MY_CARDIO_APP_TOKEN = "5937a8aff29748b483b94279c2b690a9";
+    private int REQUEST_CODE_SCAN = 3; // arbitrary int
+    private int REQUEST_CODE_PAY_WITH_CARD = 4;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +53,10 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
 		payfive = (PayFive) getActivity().getApplication();
 
         btnGenQR = (Button) view.findViewById(R.id.btn_gen_qr);
+        btnScanSendersCard = (Button) view.findViewById(R.id.btn_scan);
+
         btnGenQR.setOnClickListener(this);
+        btnScanSendersCard.setOnClickListener(this);
 
 		btnLogin = (RelativeLayout) view.findViewById(R.id.rl_btn_paypal_login);
 		btnLogin.setOnClickListener(this);
@@ -86,9 +96,33 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
                 String[] strings = {etDescription.getText().toString(), etAmount.getText().toString(),MainActivity.email,MainActivity.name};
                 intent.putExtra(EXTRA_QR_INFO, strings);
                 startActivity(intent);
+                break;
+            case R.id.btn_scan:
+                onScanCardPressed();
+                break;
 
 		}
 	}
+
+    private void onScanCardPressed(){
+
+        Intent scanIntent = new Intent(getActivity(), CardIOActivity.class);
+
+        // required for authentication with card.io
+        scanIntent.putExtra(CardIOActivity.EXTRA_APP_TOKEN, MY_CARDIO_APP_TOKEN);
+
+        // customize these values to suit your needs.
+        scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_EXPIRY, true); // default: true
+        scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_CVV, false); // default: false
+        scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, false); // default: false
+
+        // hides the manual entry button
+        // if set, developers should provide their own manual entry mechanism in the app
+        scanIntent.putExtra(CardIOActivity.EXTRA_SUPPRESS_MANUAL_ENTRY, false); // default: false
+
+        // MY_SCAN_REQUEST_CODE is arbitrary and is only used within this activity.
+        startActivityForResult(scanIntent, REQUEST_CODE_SCAN);
+    }
 
 	/* call LoginActivity for Paypal login using web view */
 	private void callPaypalLogin() {
@@ -138,7 +172,20 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
 			// TODO: call a method to enable scan card / generate qr code
 			// buttons
 
-		} else {
+		}
+        else if(requestCode == REQUEST_CODE_SCAN){
+            if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
+                CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
+                Bundle bundle = new Bundle();
+                bundle.putString(PayWithCreditCardActivity.EXTRAS_CARD_NUMBER,scanResult.cardNumber);
+                bundle.putInt(PayWithCreditCardActivity.EXTRAS_EXP_MONTH,scanResult.expiryMonth);
+                bundle.putInt(PayWithCreditCardActivity.EXTRAS_EXP_YEAR,scanResult.expiryYear);
+                Intent intent = new Intent(getActivity(), PayWithCreditCardActivity.class);
+                intent.putExtras(bundle);
+                startActivityForResult(intent,REQUEST_CODE_PAY_WITH_CARD);
+            }
+        }
+        else {
 			Toast.makeText(getActivity().getApplicationContext(),
 					R.string.toast_login_failed, Toast.LENGTH_LONG).show();
 			tvPaypal.setText("Not logged into PayPal");

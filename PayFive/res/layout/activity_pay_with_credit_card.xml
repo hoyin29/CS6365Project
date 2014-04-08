@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+<LinearLayout
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:paddingTop="20dp"
+              android:layout_height="match_parent">
+
+    <TextView
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Card Number"
+            android:id="@+id/textView"/>
+    <TextView
+            android:layout_marginLeft="15dp"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End with 1234"
+
+            android:id="@+id/txtCardNumber"/>
+    <TextView
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expiration Date"
+            android:id="@+id/textView"/>
+    <TextView
+            android:layout_marginLeft="15dp"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="02/15"
+
+            android:id="@+id/txtExpiryDate"/>
+    <TextView
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cvv"
+            android:id="@+id/textView2"/>
+    <EditText
+            android:inputType="number"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_cvv"/>
+    <TextView
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First Name"
+            android:id="@+id/textView3"/>
+    <EditText
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_firstname"/>
+    <TextView
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Name"
+            android:id="@+id/textView4"/>
+    <EditText
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_lastname"/>
+
+    <Button
+            android:layout_marginTop="40dp"
+            android:id="@+id/btn_pay"
+            style="@style/btn"
+            android:drawablePadding="4dp"
+            android:paddingLeft="8dp"
+            android:text="Pay with the Card" />
+</LinearLayout>
+</ScrollView>
