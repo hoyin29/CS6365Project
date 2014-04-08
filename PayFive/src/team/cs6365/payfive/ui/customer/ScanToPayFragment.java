@@ -1,8 +1,6 @@
 package team.cs6365.payfive.ui.customer;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 import android.widget.TextView;
 import org.json.JSONException;
@@ -10,7 +8,6 @@ import org.json.JSONException;
 import team.cs6365.payfive.PayFive;
 import team.cs6365.payfive.R;
 import team.cs6365.payfive.database.TransactionDataSource;
-import team.cs6365.payfive.model.Item;
 import team.cs6365.payfive.model.Transaction;
 import team.cs6365.payfive.model.User;
 import android.app.Activity;
@@ -26,7 +23,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 /* PayPal library */
@@ -48,6 +44,7 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 	private static final String TAG = "~~~PayFive~~~ ## ScanToPayFragment ## ";
 
 	private Transaction scanned;
+	private Boolean isScanned = false;
 
 	/* --------- PAYPAL STUFF --------- */
 	// set to PaymentActivity.ENVIRONMENT_PRODUCTION to move real money.
@@ -77,8 +74,9 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 	private Button btnConfirm;
 
 	private Activity act;
-	//private Transaction t;
-	
+
+	// private Transaction t;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -121,16 +119,14 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 		tvScanStatus
 				.setText("Scan QR code by clicking the icon on the top right");
 
-		//create an item based on the scanned
+		// create an item based on the scanned
 		/*
-		List<Item> l = new ArrayList<Item>();
-		Item i = new Item();
-		i.setPrice(scanned.getAmount());
-		i.setDescription(scanned.getDesc());
-		l.add(i);
-		t = new Transaction(0, l, scanned.getRecipient(), scanned.getSender(),
-				scanned.getAmount(), "", scanned.getDesc(), true);
-		*/
+		 * List<Item> l = new ArrayList<Item>(); Item i = new Item();
+		 * i.setPrice(scanned.getAmount()); i.setDescription(scanned.getDesc());
+		 * l.add(i); t = new Transaction(0, l, scanned.getRecipient(),
+		 * scanned.getSender(), scanned.getAmount(), "", scanned.getDesc(),
+		 * true);
+		 */
 		return view;
 	}
 
@@ -162,6 +158,8 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == REQUEST_CODE_SCANBARCODE) {
 			if (resultCode == Activity.RESULT_OK) {
+				isScanned = true; // set the flag to true to enable confirm
+									// button
 				String result = data.getStringExtra(SCANBARCODE_RESULT);
 				String[] strings = result.split(";");
 				amount = strings[0];
@@ -198,12 +196,14 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 						// for more details.
 
 						// add transaction to db for history
-						Log.d(TAG, "adding successful transaction to history db");
-						TransactionDataSource tds = new TransactionDataSource(act);
+						Log.d(TAG,
+								"adding successful transaction to history db");
+						TransactionDataSource tds = new TransactionDataSource(
+								act);
 						tds.open();
 						tds.addTransaction(scanned);
 						tds.close();
-						
+
 					} catch (JSONException e) {
 						Log.e("paymentExample",
 								"an extremely unlikely failure occurred: ", e);
@@ -233,13 +233,15 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 
 		/* confirm and pay button on click */
 		case R.id.btn_confirm:
-			// EditText etReceiverEmail =
-			// (EditText)findViewById(R.id.etReceiverEmail);
-			// EditText etPaymentAmount = (EditText)
-			// findViewById(R.id.etPaymentAmount);
-			// EditText etDescription = (EditText)
-			// findViewById(R.id.etDescription);
-			passToPaypal(scanned);
+
+			if (isScanned) {
+				passToPaypal(scanned);
+			} else {
+				Toast.makeText(
+						getActivity(),
+						"There is no scanned transaction. Please scan a transaction using QR icon.",
+						Toast.LENGTH_LONG).show();
+			}
 			break;
 
 		default:
