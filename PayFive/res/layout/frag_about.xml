@@ -14,16 +14,46 @@
   limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="10dp" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="About"
-        android:textColor="#F00"
-        android:textSize="30sp" />
+        android:layout_margin="10dp"
+        android:orientation="vertical" >
 
-</LinearLayout>
+        <TextView
+            style="@style/label"
+            android:text="About" />
+
+        <TextView
+            style="@style/heading1"
+            android:text="Paying with Credit Card" />
+
+        <TextView
+            style="@style/subtitle"
+            android:layout_marginLeft="20dp"
+            android:text="(Credit card --> PayPal) \n\nThere is a PayPal transaction fee of 2.9% or less, plus $0.30 per transaction (applied to the payment received amount)." />
+
+        <TextView
+            style="@style/heading1"
+            android:text="Paying with PayPal account" />
+
+        <TextView
+            style="@style/subtitle"
+            android:layout_marginLeft="20dp"
+            android:text="(PayPal --> PayPal) \n\nThere is no transaction fee.\n" />
+
+        <TextView
+            style="@style/heading1"
+            android:text="Developers" />
+
+        <TextView
+            style="@style/subtitle"
+            android:layout_marginLeft="20dp"
+            android:text="Team PayFive\n\nJinhyun Kim\nHo Yin Pun\nSehoon Shon\n\n" />
+    </LinearLayout>
+
+</ScrollView>
