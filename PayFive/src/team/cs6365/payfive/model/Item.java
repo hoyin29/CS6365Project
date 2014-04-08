@@ -1,9 +1,6 @@
 package team.cs6365.payfive.model;
 
 import java.io.Serializable;
-import java.io.ByteArrayOutputStream;
-import team.cs6365.payfive.util.ImageConversion;
-import android.graphics.Bitmap;
 
 /* model object for menu item */
 public class Item implements Serializable {

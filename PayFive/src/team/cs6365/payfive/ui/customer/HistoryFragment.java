@@ -9,7 +9,6 @@ import team.cs6365.payfive.database.TransactionDataSource;
 import team.cs6365.payfive.model.Item;
 import team.cs6365.payfive.model.Transaction;
 import team.cs6365.payfive.model.User;
-import team.cs6365.payfive.ui.loader.ItemLoader;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -33,8 +32,7 @@ import android.widget.Toast;
  * 
  * @author Jin
  */
-public class HistoryFragment extends Fragment implements
-		LoaderManager.LoaderCallbacks<List<Item>> {
+public class HistoryFragment extends Fragment {
 
 	private static final String TAG = "PayFive! - HistoryFragment";
 	private static final boolean DEBUG = true;
@@ -42,7 +40,7 @@ public class HistoryFragment extends Fragment implements
 	private ListView lvHistory;
 	private Activity act;
 	private List<Transaction> list;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -84,36 +82,27 @@ public class HistoryFragment extends Fragment implements
 
 		list = new ArrayList<Transaction>();
 		/*
-		Transaction t = new Transaction();
-		User u = new User("JK", "jk@test.com");
-		t.setRecipient(u);
-		t.setSendType(true);
-		t.setAmount(11.99);
-		t.setDate("1/1/2014");
-		t.setDesc("We ordered pizza.\nDave paid.\nI'm paying him back for my portion\nK.Thx.Bye.");
+		 * Transaction t = new Transaction(); User u = new User("JK",
+		 * "jk@test.com"); t.setRecipient(u); t.setSendType(true);
+		 * t.setAmount(11.99); t.setDate("1/1/2014"); t.setDesc(
+		 * "We ordered pizza.\nDave paid.\nI'm paying him back for my portion\nK.Thx.Bye."
+		 * );
+		 * 
+		 * Transaction t1 = new Transaction(); t1.setDate("2/2/2012");
+		 * t1.setAmount(12.59);
+		 * t1.setDesc("Split pizza with George P. Burdell"); t1.setRecipient(new
+		 * User("Jin", "jin@gatech")); t1.setSendType(true);
+		 * 
+		 * Transaction t2 = new Transaction(); t2.setDate("3/24/2014");
+		 * t2.setAmount(3); t2.setDesc("Lunch money return"); t2.setSender(new
+		 * User("SG", "a@b.c")); t2.setSendType(false);
+		 * 
+		 * list.add(t); list.add(t1); list.add(t2);
+		 */
 
-		Transaction t1 = new Transaction();
-		t1.setDate("2/2/2012");
-		t1.setAmount(12.59);
-		t1.setDesc("Split pizza with George P. Burdell");
-		t1.setRecipient(new User("Jin", "jin@gatech"));
-		t1.setSendType(true);
-
-		Transaction t2 = new Transaction();
-		t2.setDate("3/24/2014");
-		t2.setAmount(3);
-		t2.setDesc("Lunch money return");
-		t2.setSender(new User("SG", "a@b.c"));
-		t2.setSendType(false);
-
-		list.add(t);
-		list.add(t1);
-		list.add(t2);
-		*/
-		
 		act = getActivity();
-		createTransactions(10);  // for real code, just load history db to list
-		
+		createTransactions(10); // for real code, just load history db to list
+
 		mAdapter.setItems(list);
 		lvHistory.setAdapter(mAdapter);
 
@@ -126,55 +115,22 @@ public class HistoryFragment extends Fragment implements
 		tds.drop();
 		tds.create();
 		Random r = new Random();
-		for(int i = 0; i < n; ++i) {
+		for (int i = 0; i < n; ++i) {
 			List<Item> l = new ArrayList<Item>();
-			l.add(new Item("item" + i, r.nextDouble() * 10 + 1, "category" + i, "description" + i, ""));
-			//Log.d(TAG, "size: " + l.size());
-			//Log.d(TAG, "before: " + l.get(0).getName());
-			Transaction t = new Transaction(
-					i, l, new User("Jin", "123"), 
-					new User("Sehoon", "456"), 
-					r.nextDouble() * 10 + 1, "", "description"+i, r.nextBoolean());
-			//Log.d(TAG, "after: " + t.getItems().get(0).getName());
+			l.add(new Item("item" + i, r.nextDouble() * 10 + 1, "category" + i,
+					"description" + i, ""));
+			// Log.d(TAG, "size: " + l.size());
+			// Log.d(TAG, "before: " + l.get(0).getName());
+			Transaction t = new Transaction(i, l, new User("Jin", "123"),
+					new User("Sehoon", "456"), r.nextDouble() * 10 + 1, "",
+					"description" + i, r.nextBoolean());
+			// Log.d(TAG, "after: " + t.getItems().get(0).getName());
 			tds.addTransaction(t);
-			
+
 		}
-		
+
 		list = tds.getAllTransactions();
 		tds.close();
 	}
-	
-	/**********************/
-	/** LOADER CALLBACKS **/
-	/**********************/
 
-	@Override
-	public Loader<List<Item>> onCreateLoader(int arg0, Bundle arg1) {
-		if (DEBUG)
-			Log.i(TAG, "#_#_#_# onCreateLoader() called! #_#_#_#");
-		return new ItemLoader(getActivity());
-	}
-
-	@Override
-	public void onLoadFinished(Loader<List<Item>> arg0, List<Item> arg1) {
-		if (DEBUG)
-			Log.i(TAG, "#_#_#_# onLoadFinished() called! #_#_#_#");
-		/*
-		 * mAdapter.setData(data);
-		 * 
-		 * if (isResumed()) { setListShown(true); } else {
-		 * setListShownNoAnimation(true); } }
-		 */
-
-	}
-
-	@Override
-	public void onLoaderReset(Loader<List<Item>> arg0) {
-		if (DEBUG)
-			Log.i(TAG, "#_#_#_# onLoaderReset() called! #_#_#_#");
-		/*
-		 * mAdapter.setData(null);
-		 */
-
-	}
 }

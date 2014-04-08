@@ -19,9 +19,8 @@ public class Transaction implements Serializable {
 		this(0, null, null, null, 0.0, null, null, true);
 	}
 
-	public Transaction(long id, List<Item> items, User recipient,
-			User sender, double amount, String date, String desc,
-			boolean sendType) {
+	public Transaction(long id, List<Item> items, User recipient, User sender,
+			double amount, String date, String desc, boolean sendType) {
 		this.id = id;
 		this.items = items;
 		this.recipient = recipient;
@@ -101,9 +100,9 @@ public class Transaction implements Serializable {
 	}
 
 	public int getSendType() {
-		return sendType ? 1 : 0; 
+		return sendType ? 1 : 0;
 	}
-	
+
 	public void setSendType(boolean sendType) {
 		this.sendType = sendType;
 	}

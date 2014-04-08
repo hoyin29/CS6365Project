@@ -1,104 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
 
-    <EditText
-        android:id="@+id/etName"
+    <LinearLayout
+        style="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="@string/item_name" />
+        android:orientation="vertical"
+        android:padding="10dp" >
 
-    <EditText
-        android:id="@+id/etCategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/etName"
-        android:ems="10"
-        android:hint="@string/item_category" />
+        <TextView
+            android:id="@+id/lbl_item_title"
+            style="@style/label"
+            android:text="Item Name" />
 
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/etCategory"
-        android:ems="10"
-        android:hint="@string/item_description"
-        android:inputType="textMultiLine" />
+        <EditText
+            android:id="@+id/et_item_name"
+            style="@style/edit_text"
+            android:hint="Item Name" />
 
-    <EditText
-        android:id="@+id/etPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/etDescription"
-        android:ems="10"
-        android:hint="@string/item_price"
-        android:inputType="numberDecimal" />
+        <TextView
+            android:id="@+id/lbl_category"
+            style="@style/label"
+            android:text="Category" />
 
-    <Button
-        android:id="@+id/bPicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/etPrice"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/item_picture" />
+        <EditText
+            android:id="@+id/etCategory"
+            style="@style/edit_text"
+            android:hint="@string/item_category" />
 
-    <TextView
-        android:id="@+id/tvVisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/ivPic"
-        android:layout_alignLeft="@+id/bPicture"
-        android:layout_marginBottom="20dp"
-        android:text="@string/item_visibility" />
+        <TextView
+            android:id="@+id/lbl_desc"
+            style="@style/label"
+            android:text="Description" />
 
-    <CheckBox
-        android:id="@+id/cbVisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvVisible"
-        android:layout_alignBottom="@+id/tvVisible"
-        android:layout_alignRight="@+id/bPicture" />
+        <EditText
+            android:id="@+id/etDescription"
+            style="@style/edit_text"
+            android:hint="@string/item_description"
+            android:inputType="textMultiLine"
+            android:maxLines="3" />
 
-    <Button
-        android:id="@+id/bCancel"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/bSave"
-        android:layout_alignBottom="@+id/bSave"
-        android:layout_alignLeft="@+id/cbVisible"
-        android:layout_marginLeft="14dp"
-        android:text="@string/button_cancel" />
+        <TextView
+            android:id="@+id/lbl_amt"
+            style="@style/label"
+            android:text="Amount" />
 
-    <ImageView
-        android:id="@+id/ivPic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/bPicture"
-        android:layout_toRightOf="@+id/bCancel"
-        android:maxHeight="100dp"
-        android:maxWidth="100dp"
-        android:src="@drawable/placeholder" />
+        <LinearLayout
+            android:id="@+id/ll_price_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/bSave"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ivPic"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        android:layout_marginLeft="14dp"
-        android:text="@string/button_save" />
-    
-</RelativeLayout>
+            <TextView
+                android:id="@+id/lbl_$"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="$" />
+
+            <EditText
+                android:id="@+id/etPrice"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:hint="0.00"
+                android:inputType="numberDecimal"
+                android:minWidth="200dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tvVisible"
+                style="@style/subtitle"
+                android:layout_above="@+id/ivPic"
+                android:layout_alignLeft="@+id/bPicture"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="@string/item_visibility" />
+
+            <CheckBox
+                android:id="@+id/cbVisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tvVisible"
+                android:layout_alignBottom="@+id/tvVisible"
+                android:layout_alignRight="@+id/bPicture" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:maxHeight="100dp"
+            android:maxWidth="100dp"
+            android:src="@drawable/placeholder" />
+
+        <Button
+            android:id="@+id/bPicture"
+            style="@style/btn"
+            android:text="@string/item_picture" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/bCancel"
+                style="@style/btn"
+                android:layout_weight="1"
+                android:text="@string/button_cancel" />
+
+            <Button
+                android:id="@+id/bSave"
+                style="@style/btn"
+                android:layout_weight="1"
+                android:text="@string/button_save" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

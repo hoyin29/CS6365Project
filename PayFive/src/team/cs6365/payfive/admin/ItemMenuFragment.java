@@ -1,25 +1,18 @@
 package team.cs6365.payfive.admin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 import team.cs6365.payfive.R;
 import team.cs6365.payfive.database.MenuItemDataSource;
 import team.cs6365.payfive.model.Item;
-import team.cs6365.payfive.model.Serializer;
-import team.cs6365.payfive.ui.customer.NewTransactionFragment;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,15 +30,12 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.os.Build;
 import android.provider.MediaStore;
 
 public class ItemMenuFragment extends Fragment {
@@ -88,6 +78,7 @@ public class ItemMenuFragment extends Fragment {
 				final Item item = (Item) parent.getItemAtPosition(position);
 				Log.d(TAG, "clicked on item" + position);
 				view.showContextMenu();
+
 			}
 		});
 
@@ -292,7 +283,8 @@ public class ItemMenuFragment extends Fragment {
 		items.set(pos, curr);
 		ds.close();
 
-		final EditText etName = (EditText) dialog.findViewById(R.id.etName);
+		final EditText etName = (EditText) dialog
+				.findViewById(R.id.et_item_name);
 		final EditText etCate = (EditText) dialog.findViewById(R.id.etCategory);
 		final EditText etDesc = (EditText) dialog
 				.findViewById(R.id.etDescription);
@@ -333,9 +325,9 @@ public class ItemMenuFragment extends Fragment {
 		etCate.setEnabled(false);
 		etDesc.setEnabled(false);
 		cbVis.setClickable(false);
-		bPic.setVisibility(View.INVISIBLE);
-		bSave.setVisibility(View.INVISIBLE);
-		bCancel.setVisibility(View.INVISIBLE);
+		bPic.setVisibility(View.GONE);
+		bSave.setVisibility(View.GONE);
+		bCancel.setVisibility(View.GONE);
 
 		dialog.show();
 	}
@@ -347,7 +339,8 @@ public class ItemMenuFragment extends Fragment {
 		final MenuItemDataSource ds = new MenuItemDataSource(ctx);
 		ds.open();
 
-		final EditText etName = (EditText) dialog.findViewById(R.id.etName);
+		final EditText etName = (EditText) dialog
+				.findViewById(R.id.et_item_name);
 		final EditText etCate = (EditText) dialog.findViewById(R.id.etCategory);
 		final EditText etDesc = (EditText) dialog
 				.findViewById(R.id.etDescription);
