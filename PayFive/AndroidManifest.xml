@@ -71,8 +71,8 @@
             android:name="io.card.payment.CardIOActivity"
             android:configChanges="keyboardHidden|orientation" />
         <activity android:name="io.card.payment.DataEntryActivity" />
-        
-        <!-- 
+
+        <!--
         <activity
             android:name="team.cs6365.payfive.admin.ItemMenuFragment"
             android:label="@string/activity_item_menu" 
@@ -82,32 +82,15 @@
                 android:value="team.cs6365.payfive.ui.customer.MainActivity" />
         </activity>
         -->
-        
+
         <activity
-            android:name="team.cs6365.payfive.admin.AddItemActivity"
-            android:label="@string/activity_add_item" 
-            android:theme="@android:style/Theme.Dialog" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="team.cs6365.payfive.ui.customer.MainActivity" />
-        </activity>
-        <activity
-            android:name="team.cs6365.payfive.admin.CustomerViewFragment"
-            android:label="@string/activity_customer_view"  
+            android:name="team.cs6365.payfive.ui.customer.PayWithCreditCardActivity"
+            android:label="@string/activity_customer_view"
             android:theme="@style/PayFive" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="team.cs6365.payfive.ui.customer.MainActivity" />
         </activity>
-        <activity
-                android:name="team.cs6365.payfive.ui.customer.PayWithCreditCardActivity"
-                android:label="@string/activity_customer_view"
-                android:theme="@style/PayFive" >
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="team.cs6365.payfive.ui.customer.MainActivity" />
-        </activity>
-
     </application>
 
 </manifest>
