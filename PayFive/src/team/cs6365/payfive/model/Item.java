@@ -6,8 +6,7 @@ import java.io.Serializable;
 public class Item implements Serializable {
 	private String name, category, description;
 	private double price;
-	private String thumbnail = "";
-	// private Bitmap thumbnail;
+	private String thumbnail;
 	private boolean visible;
 
 	public Item() {
@@ -25,6 +24,7 @@ public class Item implements Serializable {
 		this.category = category;
 		this.description = description;
 		this.price = price;
+		this.thumbnail = thumbnail;
 		this.visible = visible;
 	}
 
