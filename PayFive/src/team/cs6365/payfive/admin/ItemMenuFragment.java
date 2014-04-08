@@ -187,12 +187,12 @@ public class ItemMenuFragment extends Fragment {
 		}
 		*/
 		
-		ds.addMenuItem("BBQ Pork Bowl", 9.00, "Food", "Slices of marinated pork served on top of white rice", "@drawable/asian_bbq_pork_bowl");
+		ds.addMenuItem("BBQ Pork Bowl", 9.50, "Food", "Slices of marinated pork served on top of white rice", "@drawable/asian_bbq_pork_bowl");
 		ds.addMenuItem("Korean Beef Taco", 3.25, "Food", "Kobe beef topped with melted blue cheese", "@drawable/korean_beef_taco");
 		ds.addMenuItem("Teriyaki Burger", 8.50, "Food", "Marinated chicken breast and self baked burger buns", "@drawable/grilled_chicken_burger");
-		ds.addMenuItem("Bacon Chili Fries", 6.00, "Food", "Honey grilled bacon with hot chili fries", "@drawable/bacon_chili_fries");
+		ds.addMenuItem("Bacon Chili Fries", 6.30, "Food", "Honey grilled bacon with hot chili fries", "@drawable/bacon_chili_fries");
 		ds.addMenuItem("Lobster Roll", 12.75, "Food", "Maine lobster tail meat with cheddar sauce", "@drawable/lobster_roll");
-		ds.addMenuItem("Melon Bubble Tea", 4.00, "Food", "Real diced watermelon with traditional bubble tea", "@drawable/melon_bubble_tea");
+		ds.addMenuItem("Melon Bubble Tea", 4.25, "Food", "Real diced watermelon with traditional bubble tea", "@drawable/melon_bubble_tea");
 
 		ds.close();
 	}

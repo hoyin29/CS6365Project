@@ -145,7 +145,7 @@ public class HistoryFragment extends Fragment {
 			// Log.d(TAG, "size: " + l.size());
 			// Log.d(TAG, "before: " + l.get(0).getName());
 			Transaction t = new Transaction(i, l, new User(recv[r.nextInt(recv.length)], "123"),
-					new User(send[r.nextInt(send.length)], "456"), r.nextDouble() * 10 + 1, "",
+					new User(send[r.nextInt(send.length)], "456"), r.nextDouble() * 10 + 10, "",
 					desc[r.nextInt(desc.length)], r.nextBoolean());
 			// Log.d(TAG, "after: " + t.getItems().get(0).getName());
 			tds.addTransaction(t);
