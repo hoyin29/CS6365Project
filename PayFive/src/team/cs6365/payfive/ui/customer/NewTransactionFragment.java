@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import team.cs6365.payfive.model.Item;
+import team.cs6365.payfive.model.Serializer;
 import team.cs6365.payfive.util.AccessHelperConnect;
 
 /**
@@ -69,6 +71,23 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
         tvPaypalUser.setText(sb.toString());
 
 		getActivity().setTitle("New Transaction");
+		
+		Bundle bundle = getArguments();
+		if(bundle == null) 
+			Log.d(TAG, "bundle is null");
+		else {
+			Log.d(TAG, "bundle is not null");
+			Item item = (Item) Serializer.deserialize(bundle.getByteArray("ITEM")); 
+			if(item != null) {
+				Log.d(TAG, "came from customerviewactivity");
+				Log.d(TAG, "item name: " + item.getName());
+				Log.d(TAG, "price: " + item.getPrice());
+				etDescription.setText(item.getDescription());
+				etAmount.setText(String.valueOf(item.getPrice()));
+			} else {
+				Log.d(TAG, "not from custiomer view activity");
+			}
+		}
 		return view;
 
 	}

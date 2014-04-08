@@ -3,7 +3,8 @@ package team.cs6365.payfive.model;
 public class User {
 	String name = "";
 	String paypalId = "";
-
+	Cart cart = new Cart();
+	
 	public User() {
 		this("", "");
 	}

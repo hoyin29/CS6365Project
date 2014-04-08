@@ -8,10 +8,12 @@ import team.cs6365.payfive.model.Item;
 
 import android.app.Activity;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -21,8 +23,9 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 	
 	private static final String TAG = "***MENUADP";
 	private final Activity context;
-	private final ArrayList<team.cs6365.payfive.model.Item> values;
+	private final ArrayList<Item> values;
 	private boolean isCustomer;
+	private LayoutParams lp;
 
 	public MenuItemArrayAdapter(Activity context, ArrayList<Item> values) {
 		super(context, R.layout.row, values);
@@ -34,6 +37,8 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 		} else {
 			isCustomer = false;
 		}
+		
+		lp = null;
 	}
 	
 	/*
@@ -70,7 +75,7 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 			
 			// configure view holder
 			final ViewHolder viewHolder = new ViewHolder();
-			viewHolder.pic = (ImageView) view.findViewById(R.id.ivPic);
+			viewHolder.pic = (ImageView) view.findViewById(R.id.ivThumb);
 			viewHolder.visible = (ImageView) view.findViewById(R.id.ivVisible);
 			viewHolder.name = (TextView) view.findViewById(R.id.tvName);
 			viewHolder.price = (TextView) view.findViewById(R.id.tvPrice);
@@ -89,9 +94,8 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 						viewHolder.visible.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.eye_on));
 					}
 					
-					values.get(position).setVisible(viewHolder.see);
+					//values.get(position).setVisible(viewHolder.see);
 					updateVisibility(values.get(position), viewHolder.see);
-					//MenuItemArrayAdapter.this.notifyDataSetChanged();
 				}
 			});
 	
@@ -104,7 +108,35 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 		
 		final ViewHolder vh = (ViewHolder) view.getTag();
 		Item i = values.get(position);
-		vh.pic.setImageBitmap(i.getThumbnail());
+		
+		if(i.getThumbnail().equals("")) {
+			Log.d(TAG, "picPath is empty");
+			
+			if(context == null)
+				Log.d(TAG, "context is null");
+			if(context.getResources() == null)
+				Log.d(TAG, "context resources is null");
+			if(context.getResources().getDrawable(R.drawable.placeholder) == null)
+				Log.d(TAG, "context resources drawable is null");
+			
+			if(vh.pic == null)
+				Log.d(TAG, "vh pic is null");
+			
+			vh.pic.setImageDrawable(context.getResources().getDrawable(R.drawable.placeholder));
+		} else {
+			Log.d(TAG, "picPath is not empty");
+			
+			//vh.pic.setImageBitmap(BitmapFactory.decodeFile(i.getThumbnail()));	
+			vh.pic.setImageURI(Uri.parse(i.getThumbnail()));
+		}
+		
+		lp = vh.pic.getLayoutParams();
+		lp.width = 100;
+		lp.height = 100;
+		vh.pic.setLayoutParams(lp);
+		
+		Log.d(TAG, "after setting thumbnail");
+		
 		vh.name.setText(i.getName());
 		vh.price.setText("$" + i.getPrice());
 		vh.see = i.isVisible();
@@ -114,29 +146,10 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 		} else {
 			vh.visible.setImageResource(R.drawable.eye_off);
 		}
-		
-		/*
-		vh.visible.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Log.d(TAG, position + " toggle visibility (now - else): " + vh.see);
-				if(vh.see) {
-					vh.see = false;
-					vh.visible.setImageResource(R.drawable.eye_off);
-				}
-				else {
-					vh.see = true;
-					vh.visible.setImageResource(R.drawable.eye_on);
-				}
-				updateVisibility(values.get(position), vh.see);
-				//MenuItemArrayAdapter.this.notifyDataSetChanged();
-			}
-		});
-		*/
-		if(isCustomer) {
+
+		if(isCustomer)
 			vh.visible.setVisibility(View.GONE);
-		}
-		
+	
 		return view;
 	}
 
@@ -156,6 +169,7 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 				old.getThumbnail(), 
 				v);
 		ds.updateMenuItem(old, temp);
+	
 		ds.close();
 	}
 }

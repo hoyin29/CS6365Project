@@ -1,28 +1,23 @@
 package team.cs6365.payfive.model;
 
-import android.graphics.Bitmap;
+import java.io.Serializable;
 
 /* model object for menu item */
-public class Item {
+public class Item implements Serializable{
 	private String name, category, description;
 	private double price;
-	private Bitmap thumbnail;
+	private String thumbnail;
 	private boolean visible;
 
 	public Item() {
-		this("", 0.0, "", "", null);
+		this("", 0.0, "", "", "");
 	}
 	
-	public Item(String name, double price, String category, String description, Bitmap thumbnail) {
-		this.name = name;
-		this.category = category;
-		this.description = description;
-		this.price = price;
-		this.thumbnail = thumbnail;
-		this.visible = false;
+	public Item(String name, double price, String category, String description, String thumbnail) {
+		this(name, price, category, description, thumbnail, false);
 	}
 	
-	public Item(String name, double price, String category, String description, Bitmap thumbnail, boolean visible) {
+	public Item(String name, double price, String category, String description, String thumbnail, boolean visible) {
 		this.name = name;
 		this.category = category;
 		this.description = description;
@@ -63,11 +58,11 @@ public class Item {
 		this.price = price;
 	}
 
-	public Bitmap getThumbnail() {
+	public String getThumbnail() {
 		return thumbnail;
 	}
 
-	public void setThumbnail(Bitmap thumbnail) {
+	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
 

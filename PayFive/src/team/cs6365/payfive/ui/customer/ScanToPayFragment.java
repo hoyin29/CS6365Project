@@ -1,12 +1,16 @@
 package team.cs6365.payfive.ui.customer;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.widget.TextView;
 import org.json.JSONException;
 
 import team.cs6365.payfive.PayFive;
 import team.cs6365.payfive.R;
+import team.cs6365.payfive.database.TransactionDataSource;
+import team.cs6365.payfive.model.Item;
 import team.cs6365.payfive.model.Transaction;
 import team.cs6365.payfive.model.User;
 import android.app.Activity;
@@ -72,15 +76,19 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 
 	private Button btnConfirm;
 
+	private Activity act;
+	//private Transaction t;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.frag_scan_to_pay, container,
 				false);
 
-		payfive = (PayFive) getActivity().getApplication();
+		act = getActivity();
+		payfive = (PayFive) act.getApplication();
 
-		getActivity().setTitle("Scan to Pay");
+		act.setTitle("Scan to Pay");
 		setHasOptionsMenu(true);
 
 		/* PayPal service */
@@ -92,7 +100,7 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 		intent.putExtra(PaymentActivity.EXTRA_RECEIVER_EMAIL,
 				CONFIG_RECEIVER_EMAIL);
 
-		getActivity().startService(intent);
+		act.startService(intent);
 
 		// --------------------
 
@@ -113,6 +121,16 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 		tvScanStatus
 				.setText("Scan QR code by clicking the icon on the top right");
 
+		//create an item based on the scanned
+		/*
+		List<Item> l = new ArrayList<Item>();
+		Item i = new Item();
+		i.setPrice(scanned.getAmount());
+		i.setDescription(scanned.getDesc());
+		l.add(i);
+		t = new Transaction(0, l, scanned.getRecipient(), scanned.getSender(),
+				scanned.getAmount(), "", scanned.getDesc(), true);
+		*/
 		return view;
 	}
 
@@ -179,6 +197,13 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 						// https://developer.paypal.com/webapps/developer/docs/integration/mobile/verify-mobile-payment/
 						// for more details.
 
+						// add transaction to db for history
+						Log.d(TAG, "adding successful transaction to history db");
+						TransactionDataSource tds = new TransactionDataSource(act);
+						tds.open();
+						tds.addTransaction(scanned);
+						tds.close();
+						
 					} catch (JSONException e) {
 						Log.e("paymentExample",
 								"an extremely unlikely failure occurred: ", e);

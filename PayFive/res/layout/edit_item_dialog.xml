@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="@string/item_name" />
+
+    <EditText
+        android:id="@+id/etCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/etName"
+        android:ems="10"
+        android:hint="@string/item_category" />
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/etCategory"
+        android:ems="10"
+        android:hint="@string/item_description"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/etPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/etDescription"
+        android:ems="10"
+        android:hint="@string/item_price"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/bPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/etPrice"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/item_picture" />
+
+    <TextView
+        android:id="@+id/tvVisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ivPic"
+        android:layout_alignLeft="@+id/bPicture"
+        android:layout_marginBottom="20dp"
+        android:text="@string/item_visibility" />
+
+    <CheckBox
+        android:id="@+id/cbVisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvVisible"
+        android:layout_alignBottom="@+id/tvVisible"
+        android:layout_alignRight="@+id/bPicture" />
+
+    <Button
+        android:id="@+id/bCancel"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bSave"
+        android:layout_alignBottom="@+id/bSave"
+        android:layout_alignLeft="@+id/cbVisible"
+        android:layout_marginLeft="14dp"
+        android:text="@string/button_cancel" />
+
+    <ImageView
+        android:id="@+id/ivPic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/bPicture"
+        android:layout_toRightOf="@+id/bCancel"
+        android:maxHeight="100dp"
+        android:maxWidth="100dp"
+        android:src="@drawable/placeholder" />
+
+    <Button
+        android:id="@+id/bSave"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ivPic"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="14dp"
+        android:text="@string/button_save" />
+    
+</RelativeLayout>

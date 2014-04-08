@@ -16,7 +16,7 @@ public class MenuItemDatabaseHelper extends SQLiteOpenHelper
     		MenuItemDatabaseContract.COLUMN_NAME_PRICE + " REAL NOT NULL, " +
     		MenuItemDatabaseContract.COLUMN_NAME_CATEGORY + " TEXT NOT NULL, " + 
     		MenuItemDatabaseContract.COLUMN_NAME_DESCRIPTION + " TEXT NOT NULL, " + 
-    		MenuItemDatabaseContract.COLUMN_NAME_THUMBNAIL + " BLOB NOT NULL, " + 
+    		MenuItemDatabaseContract.COLUMN_NAME_THUMBNAIL + " TEXT NOT NULL, " + 
     		MenuItemDatabaseContract.COLUMN_NAME_VISIBLE + " INTEGER NOT NULL)";
     
     public static final String SQL_DROP_MENUITEM_TABLE = 

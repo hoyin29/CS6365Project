@@ -2,11 +2,15 @@ package team.cs6365.payfive.ui.customer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import team.cs6365.payfive.R;
+import team.cs6365.payfive.database.TransactionDataSource;
 import team.cs6365.payfive.model.Item;
 import team.cs6365.payfive.model.Transaction;
 import team.cs6365.payfive.model.User;
 import team.cs6365.payfive.ui.loader.ItemLoader;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -36,7 +40,9 @@ public class HistoryFragment extends Fragment implements
 	private static final boolean DEBUG = true;
 	private HistoryAdapter mAdapter;
 	private ListView lvHistory;
-
+	private Activity act;
+	private List<Transaction> list;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -76,8 +82,8 @@ public class HistoryFragment extends Fragment implements
 			}
 		});
 
-		List<Transaction> list = new ArrayList<Transaction>();
-
+		list = new ArrayList<Transaction>();
+		/*
 		Transaction t = new Transaction();
 		User u = new User("JK", "jk@test.com");
 		t.setRecipient(u);
@@ -103,13 +109,41 @@ public class HistoryFragment extends Fragment implements
 		list.add(t);
 		list.add(t1);
 		list.add(t2);
-
+		*/
+		
+		act = getActivity();
+		createTransactions(10);  // for real code, just load history db to list
+		
 		mAdapter.setItems(list);
 		lvHistory.setAdapter(mAdapter);
 
 		return rootView;
 	}
 
+	private void createTransactions(int n) {
+		TransactionDataSource tds = new TransactionDataSource(act);
+		tds.open();
+		tds.drop();
+		tds.create();
+		Random r = new Random();
+		for(int i = 0; i < n; ++i) {
+			List<Item> l = new ArrayList<Item>();
+			l.add(new Item("item" + i, r.nextDouble() * 10 + 1, "category" + i, "description" + i, ""));
+			//Log.d(TAG, "size: " + l.size());
+			//Log.d(TAG, "before: " + l.get(0).getName());
+			Transaction t = new Transaction(
+					i, l, new User("Jin", "123"), 
+					new User("Sehoon", "456"), 
+					r.nextDouble() * 10 + 1, "", "description"+i, r.nextBoolean());
+			//Log.d(TAG, "after: " + t.getItems().get(0).getName());
+			tds.addTransaction(t);
+			
+		}
+		
+		list = tds.getAllTransactions();
+		tds.close();
+	}
+	
 	/**********************/
 	/** LOADER CALLBACKS **/
 	/**********************/

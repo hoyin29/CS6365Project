@@ -37,7 +37,7 @@ import team.cs6365.payfive.R.id;
 import team.cs6365.payfive.R.layout;
 import team.cs6365.payfive.R.menu;
 import team.cs6365.payfive.R.string;
-import team.cs6365.payfive.admin.ItemMenuActivity;
+import team.cs6365.payfive.admin.ItemMenuFragment;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Fragment;
@@ -238,12 +238,15 @@ public class MainActivity extends Activity {
 					.replace(R.id.content_frame, aboutFragment).commit();
 			break;
 		case ADMIN_ITEM_MENU:
-			Intent intent = new Intent(this, ItemMenuActivity.class);
-			startActivity(intent);
+			//Intent intent = new Intent(this, ItemMenuFragment.class);
+			//startActivity(intent);
+			
+			Fragment itemMenuFragment = new ItemMenuFragment();
+			fragmentManager.beginTransaction()
+			.replace(R.id.content_frame, itemMenuFragment).commit();
 			break;
 		default:
 			Fragment defaultFragment = new NewTransactionFragment();
-
 			fragmentManager.beginTransaction()
 					.replace(R.id.content_frame, defaultFragment).commit();
 			break;

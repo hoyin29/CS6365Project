@@ -62,15 +62,31 @@ public class MenuItemDataSource
 		Log.d(TAG, "current count: " + getAllMenuItems().size());
 	}
 	
-	public void addMenuItem(String name, double price, String category, String description, Bitmap thumbnail) 
+	public void addMenuItem(Item i) {
+		ContentValues row = new ContentValues();
+		row.put(columns[0], i.getName());
+		row.put(columns[1], formatPrice(i.getPrice()));
+		row.put(columns[2], i.getCategory());
+		row.put(columns[3], i.getDescription());
+		row.put(columns[4], i.getThumbnail());
+		row.put(columns[5], i.isVisible());
+		db.insert(MenuItemDatabaseContract.TABLE_NAME, null, row);	
+	}
+	
+	public void addMenuItem(String name, double price, String category, String description, String thumbnail) 
+	{
+		addMenuItem(name, price, category, description, thumbnail, false);
+	}
+	
+	public void addMenuItem(String name, double price, String category, String description, String thumbnail, boolean visible) 
 	{
 		ContentValues row = new ContentValues();
 		row.put(columns[0], name);
-		row.put(columns[1], price);
+		row.put(columns[1], formatPrice(price));
 		row.put(columns[2], category);
 		row.put(columns[3], description);
-		row.put(columns[4], Serializer.serializeImage(ctx, thumbnail));
-		row.put(columns[5], 0);
+		row.put(columns[4], thumbnail);
+		row.put(columns[5], visible);
 		db.insert(MenuItemDatabaseContract.TABLE_NAME, null, row);
 	}
 	
@@ -86,26 +102,28 @@ public class MenuItemDataSource
 	{	
 		ContentValues row = new ContentValues();
 		row.put(columns[0], after.getName());
-		row.put(columns[1], after.getPrice());
+		row.put(columns[1], formatPrice(after.getPrice()));
 		row.put(columns[2], after.getCategory());
 		row.put(columns[3], after.getDescription());
-		row.put(columns[4], Serializer.serializeImage(ctx, after.getThumbnail()));
+		row.put(columns[4], after.getThumbnail());
 		row.put(columns[5], after.isVisible() ? 1 : 0);
-		db.update(MenuItemDatabaseContract.TABLE_NAME, row,
+		Log.d(TAG, "update affected: " + db.update(MenuItemDatabaseContract.TABLE_NAME, row,
 				 MenuItemDatabaseContract.COLUMN_NAME_NAME + "='" + before.getName() + "' AND "
-				+ MenuItemDatabaseContract.COLUMN_NAME_PRICE + "=" + before.getPrice() + " AND "
+				+ MenuItemDatabaseContract.COLUMN_NAME_PRICE + "=" + formatPrice(before.getPrice()) + " AND "
 				+ MenuItemDatabaseContract.COLUMN_NAME_CATEGORY + "='" + before.getCategory() + "' AND "
-				+ MenuItemDatabaseContract.COLUMN_NAME_DESCRIPTION + "='" + before.getDescription() + "'", null);
+				+ MenuItemDatabaseContract.COLUMN_NAME_DESCRIPTION + "='" + before.getDescription() + "'", null));
 	}
 	
-	public Item getMenuItem(String name, String category)
+	public Item getMenuItem(String name, double price, String category, String description)
 	{
 		Item mi = new Item();
 		
 		Cursor cur = db.query(MenuItemDatabaseContract.TABLE_NAME, 
 				columns,
 				MenuItemDatabaseContract.COLUMN_NAME_NAME + "='" + name + "' AND " + 
-				MenuItemDatabaseContract.COLUMN_NAME_CATEGORY + "='" + category + "'", 
+				MenuItemDatabaseContract.COLUMN_NAME_PRICE + "=" + String.valueOf(formatPrice(price)) + " AND " + 
+				MenuItemDatabaseContract.COLUMN_NAME_CATEGORY + "='" + category + "' AND " + 
+				MenuItemDatabaseContract.COLUMN_NAME_DESCRIPTION + "='" + description + "'", 
 				null, null, null, null);
 		
 		if(cur != null && cur.getCount() > 0)
@@ -176,7 +194,8 @@ public class MenuItemDataSource
 				cur.getDouble(1),	
 				cur.getString(2),
 				cur.getString(3),
-				null);
+				cur.getString(4),
+				cur.getInt(5) == 0 ? false : true);
 		
 		Log.d(TAG, "-------------------------------");
 		Log.d(TAG, "column count: " + cur.getColumnCount());
@@ -184,25 +203,17 @@ public class MenuItemDataSource
 		Log.d(TAG, "price: " + cur.getDouble(1));
 		Log.d(TAG, "category: " + cur.getString(2));
 		Log.d(TAG, "description: " + cur.getString(3));
+		Log.d(TAG, "thumbnail: " + cur.getString(4));
+		Log.d(TAG, "visible: " + cur.getInt(5));
 		
 		for(int i = 0; i < cur.getColumnCount(); ++i) {
 			Log.d(TAG, "column" + i + " - " + cur.getColumnName(i));
 		}
-		
-		byte[] img = cur.getBlob(4);
-		//mi.setThumbnail(BitmapFactory.decodeByteArray(img, 0, img.length));
-		mi.setThumbnail((Bitmap)Serializer.deserializeImage(img));
-		mi.setVisible(cur.getInt(5) == 0 ? false : true);
-		
-		//Log.d(TAG, "visible: " + cur.getInt(5));
-		
-		/*
-		if(mi.getThumbnail() == null)
-			Log.d(TAG, "bitmap: null");
-		else
-			Log.d(TAG, "bitmap: not null");
-		*/
-		
+
 		return mi;
+	}
+	
+	protected double formatPrice(double d) {
+		return Math.round(d * 100.0) / 100.0;
 	}
 }
