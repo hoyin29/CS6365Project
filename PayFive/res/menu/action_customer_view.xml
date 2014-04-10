@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_menu_admin_view"
+        android:showAsAction="withText"
+        android:title="Admin View"/>
+
+</menu>

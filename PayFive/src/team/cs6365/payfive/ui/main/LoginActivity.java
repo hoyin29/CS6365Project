@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package team.cs6365.payfive.ui.customer;
+package team.cs6365.payfive.ui.main;
 
 import org.json.JSONException;
 import org.json.JSONObject;

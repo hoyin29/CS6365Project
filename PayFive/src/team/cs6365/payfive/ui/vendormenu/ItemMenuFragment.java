@@ -1,4 +1,4 @@
-package team.cs6365.payfive.admin;
+package team.cs6365.payfive.ui.vendormenu;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -15,7 +15,6 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -115,7 +114,7 @@ public class ItemMenuFragment extends Fragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.action_bar, menu);
+		inflater.inflate(R.menu.action_item_menu, menu);
 	}
 
 	@Override

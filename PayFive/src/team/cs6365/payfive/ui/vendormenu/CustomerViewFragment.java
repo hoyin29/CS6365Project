@@ -1,4 +1,4 @@
-package team.cs6365.payfive.admin;
+package team.cs6365.payfive.ui.vendormenu;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import team.cs6365.payfive.R;
 import team.cs6365.payfive.database.MenuItemDataSource;
 import team.cs6365.payfive.model.Item;
 import team.cs6365.payfive.model.Serializer;
-import team.cs6365.payfive.ui.customer.NewTransactionFragment;
+import team.cs6365.payfive.ui.transaction.NewTransactionFragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -14,6 +14,9 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -34,10 +37,13 @@ public class CustomerViewFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_item_menu,
 				container, false);
 
+		setHasOptionsMenu(true);
 		ctx = getActivity();
 		ctx.setTitle("Customer Menu");
 
 		listview = (ListView) rootView.findViewById(R.id.listview);
+		listview.setEmptyView(rootView.findViewById(android.R.id.empty));
+
 		items = new ArrayList<Item>();
 
 		adapter = new MenuItemArrayAdapter(ctx, items);
@@ -84,5 +90,29 @@ public class CustomerViewFragment extends Fragment {
 		adapter.notifyDataSetChanged();
 		adapter = new MenuItemArrayAdapter(ctx, items);
 		listview.setAdapter(adapter);
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.action_customer_view, menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+
+		/* if Admin View is clicked, display Admin View again */
+		case R.id.action_menu_admin_view:
+
+			Fragment adminViewFragment = new ItemMenuFragment();
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, adminViewFragment).commit();
+			return true;
+
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }

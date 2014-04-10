@@ -1,4 +1,4 @@
-package team.cs6365.payfive.ui.customer;
+package team.cs6365.payfive.ui.transaction;
 
 import android.app.Activity;
 import android.os.Bundle;

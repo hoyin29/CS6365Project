@@ -1,4 +1,4 @@
-package team.cs6365.payfive.ui.customer;
+package team.cs6365.payfive.ui.main;
 
 import team.cs6365.payfive.R;
 import android.app.Fragment;

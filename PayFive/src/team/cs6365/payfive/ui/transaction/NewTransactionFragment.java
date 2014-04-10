@@ -1,4 +1,4 @@
-package team.cs6365.payfive.ui.customer;
+package team.cs6365.payfive.ui.transaction;
 
 import android.widget.*;
 import com.paypal.android.sdk.payments.PayPalPayment;
@@ -21,6 +21,8 @@ import android.view.ViewGroup;
 
 import team.cs6365.payfive.model.Item;
 import team.cs6365.payfive.model.Serializer;
+import team.cs6365.payfive.ui.main.LoginActivity;
+import team.cs6365.payfive.ui.main.MainActivity;
 import team.cs6365.payfive.util.AccessHelperConnect;
 
 import java.math.BigDecimal;
@@ -120,13 +122,27 @@ public class NewTransactionFragment extends Fragment implements OnClickListener 
 			break;
 
 		case R.id.btn_gen_qr:
-			Intent intent = new Intent(getActivity(),
-					CreateQRCodeActivity.class);
-			String[] strings = { etDescription.getText().toString(),
-					etAmount.getText().toString(),
-					MainActivity.paypalUserEmail, MainActivity.paypalUserName };
-			intent.putExtra(EXTRA_QR_INFO, strings);
-			startActivity(intent);
+
+			if (MainActivity.paypalUserEmail.equals("")) {
+				Toast.makeText(getActivity(), "Please login to PayPal first.",
+						Toast.LENGTH_SHORT).show();
+			} else if (etAmount.getText().toString().equals("")) {
+				Toast.makeText(getActivity(), "Please specify the amount.",
+						Toast.LENGTH_SHORT).show();
+			} else if (etAmount.getText().toString().equals("")) {
+				Toast.makeText(getActivity(), "Please fill out description.",
+						Toast.LENGTH_SHORT).show();
+			} else {
+
+				Intent intent = new Intent(getActivity(),
+						CreateQRCodeActivity.class);
+				String[] strings = { etDescription.getText().toString(),
+						etAmount.getText().toString(),
+						MainActivity.paypalUserEmail,
+						MainActivity.paypalUserName };
+				intent.putExtra(EXTRA_QR_INFO, strings);
+				startActivity(intent);
+			}
 			break;
 
 		case R.id.btn_scan:

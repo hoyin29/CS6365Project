@@ -1,4 +1,4 @@
-package team.cs6365.payfive.ui.customer;
+package team.cs6365.payfive.ui.transaction;
 
 /**
  * Created by Sehoon on 3/19/14.

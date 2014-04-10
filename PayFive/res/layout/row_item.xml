@@ -17,19 +17,32 @@
         android:scaleType="fitCenter"
         android:src="@drawable/placeholder" />
 
+    <ImageView
+        android:id="@+id/ivVisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvPrice"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="4dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:src="@drawable/eye_off" />
+
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/ivVisible"
         android:layout_toRightOf="@id/ivPic"
+        android:ellipsize="end"
         android:focusable="false"
-        android:gravity="center"
+        android:gravity="left"
+        android:maxLength="15"
         android:maxLines="1"
         android:text="@string/item_name"
         android:textColor="@color/theme_text"
-        android:ellipsize="end"
-        android:maxLength="15"
         android:textSize="22sp" />
 
     <TextView
@@ -38,21 +51,10 @@
         android:layout_alignBottom="@id/ivPic"
         android:layout_alignLeft="@id/tvName"
         android:layout_below="@id/tvName"
+        android:ellipsize="end"
         android:focusable="false"
         android:gravity="center"
-        android:ellipsize="end"
         android:text="@string/item_price"
         android:textSize="16sp" />
-
-    <ImageView
-        android:id="@+id/ivVisible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tvPrice"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="22dp"
-        android:clickable="true"
-        android:gravity="center"
-        android:src="@drawable/eye_off" />
 
 </RelativeLayout>

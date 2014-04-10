@@ -25,7 +25,7 @@
  * limitations under the License.
  */
 
-package team.cs6365.payfive.ui.customer;
+package team.cs6365.payfive.ui.main;
 
 import java.util.Locale;
 
@@ -37,8 +37,10 @@ import team.cs6365.payfive.R.id;
 import team.cs6365.payfive.R.layout;
 import team.cs6365.payfive.R.menu;
 import team.cs6365.payfive.R.string;
-import team.cs6365.payfive.admin.CustomerViewFragment;
-import team.cs6365.payfive.admin.ItemMenuFragment;
+import team.cs6365.payfive.ui.transaction.NewTransactionFragment;
+import team.cs6365.payfive.ui.transaction.ScanToPayFragment;
+import team.cs6365.payfive.ui.vendormenu.CustomerViewFragment;
+import team.cs6365.payfive.ui.vendormenu.ItemMenuFragment;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Fragment;
@@ -118,11 +120,11 @@ public class MainActivity extends Activity {
 
 	protected PayFive payfive;
 
-	static String paypalUserEmail = "";
-	static String paypalUserName = "";
-	static String paypalUserPhone = "";
+	public static String paypalUserEmail = "";
+	public static String paypalUserName = "";
+	public static String paypalUserPhone = "";
 
-	static boolean isLoggedIn = false;
+	public static boolean isLoggedIn = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

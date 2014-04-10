@@ -1,4 +1,4 @@
-package team.cs6365.payfive.admin;
+package team.cs6365.payfive.ui.vendormenu;
 
 import java.util.ArrayList;
 

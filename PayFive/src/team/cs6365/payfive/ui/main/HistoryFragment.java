@@ -1,4 +1,4 @@
-package team.cs6365.payfive.ui.customer;
+package team.cs6365.payfive.ui.main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import team.cs6365.payfive.database.TransactionDataSource;
 import team.cs6365.payfive.model.Item;
 import team.cs6365.payfive.model.Transaction;
 import team.cs6365.payfive.model.User;
+import team.cs6365.payfive.ui.transaction.TransactionInfoDialogFragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
