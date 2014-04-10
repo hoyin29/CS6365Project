@@ -8,6 +8,7 @@ import org.json.JSONException;
 import team.cs6365.payfive.PayFive;
 import team.cs6365.payfive.R;
 import team.cs6365.payfive.database.TransactionDataSource;
+import team.cs6365.payfive.model.Formatter;
 import team.cs6365.payfive.model.Transaction;
 import team.cs6365.payfive.model.User;
 import android.app.Activity;
@@ -103,10 +104,12 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 		// --------------------
 
 		scanned = new Transaction();
+		/*
 		scanned.setRecipient(new User("Jin", "test@test.test"));
 		scanned.setAmount(0.01);
 		scanned.setDesc("Test description");
-
+		*/
+		
 		/* VIEW ELEMENTS */
 		btnConfirm = (Button) view.findViewById(R.id.btn_confirm);
 		btnConfirm.setOnClickListener(this);
@@ -172,6 +175,14 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 				txtAmount.setText(amount);
 				txtDescription.setText(description);
 				tvScanStatus.setText("Transaction Info");
+				
+				// transaction from qr code
+				scanned.setRecipient(new User(name, email));
+				scanned.setSender(new User());
+				scanned.setSendType(true);
+				scanned.setAmount(Double.valueOf(Formatter.formatPrice(Double.valueOf(amount))));
+				scanned.setDesc(description);
+				
 				Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT)
 						.show();
 			}

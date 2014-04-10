@@ -24,7 +24,8 @@
         <item>Scan to Pay</item>
         <item>History</item>
         <item>About</item>
-        <item>Admin Item Menu</item>
+        <item>Admin Menu</item>
+        <item>Customer Menu</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>

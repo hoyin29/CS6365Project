@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import team.cs6365.payfive.R;
 import team.cs6365.payfive.database.MenuItemDataSource;
+import team.cs6365.payfive.model.Formatter;
 import team.cs6365.payfive.model.Item;
+import team.cs6365.payfive.model.Resizer;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -32,10 +35,13 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 		super(context, R.layout.row_item, values);
 		this.context = context;
 		this.values = values;
-		if (context.getClass().getSimpleName().equals("CustomerViewActivity")) {
-			Log.d(TAG, "calling adapter for customer view activity");
+
+		if (context.getClass().getSimpleName().equals("CustomerViewFragment")) {
+			Log.d(TAG, "calling adapter for customer view fragment");
 			isCustomer = true;
 		} else {
+			Log.d(TAG, "not calling adapter from customer view fragment");
+			Log.d(TAG, "from: " + context.getClass().getSimpleName());
 			isCustomer = false;
 		}
 
@@ -131,23 +137,27 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 			Log.d(TAG, "picPath is not empty");
 
 			Log.d(TAG, "picPath: " + i.getThumbnail());
-			// vh.pic.setImageBitmap(BitmapFactory.decodeFile(i.getThumbnail()));
-			//vh.pic.setImageURI(Uri.parse(i.getThumbnail())); this works
 			
+			vh.pic.setImageBitmap(Resizer.resizeImage(i.getThumbnail()));
+			
+			//vh.pic.setImageURI(Uri.parse(i.getThumbnail()));  // this works
+			
+			/*
 			int imageResource = context.getResources().getIdentifier(i.getThumbnail(), null, context.getPackageName());
 			Drawable res = context.getResources().getDrawable(imageResource);
 			vh.pic.setImageDrawable(res);
+			*/
 		}
 
 		lp = vh.pic.getLayoutParams();
-		lp.width = 100;
-		lp.height = 100;
+		lp.width = Resizer.WIDTH;
+		lp.height = Resizer.HEIGHT;
 		vh.pic.setLayoutParams(lp);
 
 		Log.d(TAG, "after setting thumbnail");
 
-		vh.name.setText(i.getName());
-		vh.price.setText("$" + i.getPrice());
+		vh.name.setText(Formatter.formatName(i.getName()));
+		vh.price.setText("$" + Formatter.formatPrice(i.getPrice()));
 		vh.see = i.isVisible();
 
 		if (vh.see) {
@@ -174,7 +184,6 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 		Item temp = new Item(old.getName(), old.getPrice(), old.getCategory(),
 				old.getDescription(), old.getThumbnail(), v);
 		ds.updateMenuItem(old, temp);
-
 		ds.close();
 	}
 }
