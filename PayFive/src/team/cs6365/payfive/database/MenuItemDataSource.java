@@ -2,6 +2,7 @@ package team.cs6365.payfive.database;
 
 import java.util.ArrayList;
 
+import team.cs6365.payfive.model.Formatter;
 import team.cs6365.payfive.model.Item;
 
 import android.content.ContentValues;
@@ -54,14 +55,19 @@ public class MenuItemDataSource {
 	}
 
 	public void addMenuItem(Item i) {
+		/*
 		ContentValues row = new ContentValues();
 		row.put(columns[0], i.getName());
-		row.put(columns[1], formatPrice(i.getPrice()));
+		row.put(columns[1], i.getPrice());
 		row.put(columns[2], i.getCategory());
 		row.put(columns[3], i.getDescription());
 		row.put(columns[4], i.getThumbnail());
 		row.put(columns[5], i.isVisible());
 		db.insert(MenuItemDatabaseContract.TABLE_NAME, null, row);
+		*/
+		addMenuItem(i.getName(), i.getPrice(), i.getCategory(), 
+				i.getDescription(), i.getThumbnail(), i.isVisible());
+		
 	}
 
 	public void addMenuItem(String name, double price, String category,
@@ -73,7 +79,7 @@ public class MenuItemDataSource {
 			String description, String thumbnail, boolean visible) {
 		ContentValues row = new ContentValues();
 		row.put(columns[0], name);
-		row.put(columns[1], formatPrice(price));
+		row.put(columns[1], Formatter.formatPrice(price));
 		row.put(columns[2], category);
 		row.put(columns[3], description);
 		row.put(columns[4], thumbnail);
@@ -93,7 +99,7 @@ public class MenuItemDataSource {
 	public void updateMenuItem(Item before, Item after) {
 		ContentValues row = new ContentValues();
 		row.put(columns[0], after.getName());
-		row.put(columns[1], formatPrice(after.getPrice()));
+		row.put(columns[1], Formatter.formatPrice(after.getPrice()));
 		row.put(columns[2], after.getCategory());
 		row.put(columns[3], after.getDescription());
 		row.put(columns[4], after.getThumbnail());
@@ -109,7 +115,7 @@ public class MenuItemDataSource {
 										+ "' AND "
 										+ MenuItemDatabaseContract.COLUMN_NAME_PRICE
 										+ "="
-										+ formatPrice(before.getPrice())
+										+ Formatter.formatPrice(before.getPrice())
 										+ " AND "
 										+ MenuItemDatabaseContract.COLUMN_NAME_CATEGORY
 										+ "='"
@@ -127,7 +133,7 @@ public class MenuItemDataSource {
 		Cursor cur = db.query(MenuItemDatabaseContract.TABLE_NAME, columns,
 				MenuItemDatabaseContract.COLUMN_NAME_NAME + "='" + name
 						+ "' AND " + MenuItemDatabaseContract.COLUMN_NAME_PRICE
-						+ "=" + String.valueOf(formatPrice(price)) + " AND "
+						+ "=" + Formatter.formatPrice(price) + " AND "
 						+ MenuItemDatabaseContract.COLUMN_NAME_CATEGORY + "='"
 						+ category + "' AND "
 						+ MenuItemDatabaseContract.COLUMN_NAME_DESCRIPTION
@@ -188,7 +194,7 @@ public class MenuItemDataSource {
 	}
 
 	public Item cursorToMenuItem(Cursor cur) {
-		Item mi = new Item(cur.getString(0), cur.getDouble(1),
+		Item mi = new Item(cur.getString(0), Double.valueOf(Formatter.formatPrice(cur.getDouble(1))),
 				cur.getString(2), cur.getString(3), cur.getString(4),
 				cur.getInt(5) == 0 ? false : true);
 
@@ -206,9 +212,5 @@ public class MenuItemDataSource {
 		}
 
 		return mi;
-	}
-
-	protected double formatPrice(double d) {
-		return Math.round(d * 100.0) / 100.0;
 	}
 }
