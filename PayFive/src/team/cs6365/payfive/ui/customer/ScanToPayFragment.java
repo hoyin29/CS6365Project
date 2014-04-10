@@ -177,7 +177,7 @@ public class ScanToPayFragment extends Fragment implements OnClickListener {
 				tvScanStatus.setText("Transaction Info");
 				
 				// transaction from qr code
-				scanned.setRecipient(new User(email, ""));
+				scanned.setRecipient(new User(name, email));
 				scanned.setSender(new User());
 				scanned.setSendType(true);
 				scanned.setAmount(Double.valueOf(Formatter.formatPrice(Double.valueOf(amount))));
