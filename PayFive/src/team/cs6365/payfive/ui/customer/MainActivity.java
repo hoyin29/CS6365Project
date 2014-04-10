@@ -112,12 +112,12 @@ public class MainActivity extends Activity {
 	private final int HISTORY = 2;
 	private final int DRAWER_ABOUT = 3;
 	private final int ADMIN_ITEM_MENU = 4;
-	
+
 	protected PayFive payfive;
 
-	static String email = "";
-	static String name = "";
-	static String phone = "";
+	static String paypalUserEmail = "";
+	static String paypalUserName = "";
+	static String paypalUserPhone = "";
 
 	static boolean isLoggedIn = false;
 
@@ -238,12 +238,12 @@ public class MainActivity extends Activity {
 					.replace(R.id.content_frame, aboutFragment).commit();
 			break;
 		case ADMIN_ITEM_MENU:
-			//Intent intent = new Intent(this, ItemMenuFragment.class);
-			//startActivity(intent);
-			
+			// Intent intent = new Intent(this, ItemMenuFragment.class);
+			// startActivity(intent);
+
 			Fragment itemMenuFragment = new ItemMenuFragment();
 			fragmentManager.beginTransaction()
-			.replace(R.id.content_frame, itemMenuFragment).commit();
+					.replace(R.id.content_frame, itemMenuFragment).commit();
 			break;
 		default:
 			Fragment defaultFragment = new NewTransactionFragment();
@@ -285,4 +285,8 @@ public class MainActivity extends Activity {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
+	// return true if paypalUserEmail is set (after logging in) else false
+	public static Boolean isLoggedIn() {
+		return (!paypalUserEmail.equals(""));
+	}
 }
