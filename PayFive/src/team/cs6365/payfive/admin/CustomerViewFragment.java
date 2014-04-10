@@ -35,7 +35,7 @@ public class CustomerViewFragment extends Fragment {
 				container, false);
 
 		ctx = getActivity();
-		ctx.setTitle("Customer View");
+		ctx.setTitle("Customer Menu");
 
 		listview = (ListView) rootView.findViewById(R.id.listview);
 		items = new ArrayList<Item>();
