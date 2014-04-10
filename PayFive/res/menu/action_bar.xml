@@ -13,13 +13,15 @@
     <item android:id="@+id/iASort"
           android:icon="@android:drawable/ic_menu_sort_alphabetically"
           android:title="@string/action_sort"
-          android:showAsAction="ifRoom" />
-    
+    	  android:showAsAction="never" />
+    <!--         android:showAsAction="ifRoom" /> -->
+    	
     <!-- Search, should appear as action button -->
     <item android:id="@+id/iASearch"
           android:icon="@android:drawable/ic_menu_search"
           android:title="@string/action_search"
-          android:showAsAction="ifRoom" />
+          android:showAsAction="never" />
+    <!--  android:showAsAction="ifRoom" />  -->
     
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/iASettings"
