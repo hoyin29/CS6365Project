@@ -156,7 +156,7 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 
 		Log.d(TAG, "after setting thumbnail");
 
-		vh.name.setText(i.getName());
+		vh.name.setText(Formatter.formatName(i.getName()));
 		vh.price.setText("$" + Formatter.formatPrice(i.getPrice()));
 		vh.see = i.isVisible();
 
@@ -184,7 +184,6 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 		Item temp = new Item(old.getName(), old.getPrice(), old.getCategory(),
 				old.getDescription(), old.getThumbnail(), v);
 		ds.updateMenuItem(old, temp);
-
 		ds.close();
 	}
 }

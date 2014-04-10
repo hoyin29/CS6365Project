@@ -61,7 +61,7 @@ public class ItemMenuFragment extends Fragment {
 
 		View rootView = inflater.inflate(R.layout.fragment_item_menu,
 				container, false);
-		getActivity().setTitle("Item Menu");
+		getActivity().setTitle("Admin Menu");
 		ctx = getActivity();
 		picPath = "";
 		ivPic = null;
@@ -84,7 +84,7 @@ public class ItemMenuFragment extends Fragment {
 			}
 		});
 
-		addItemsToDB(20);
+		//addItemsToDB(20);
 		refreshListview();
 		registerForContextMenu(listview);
 		Log.d(TAG, "done with onCreate()");
@@ -181,12 +181,14 @@ public class ItemMenuFragment extends Fragment {
 		ds.create();
 		Random r = new Random();
 		
+		/*
 		for (int i = 0; i < n; ++i) {
 			Log.d(TAG, "adding item" + i);
 			ds.addMenuItem("item" + i, r.nextDouble() * 10 + 1, "category" + i,
 					"description" + i, "");
 		}
-
+		*/
+		
 		/*
 		ds.addMenuItem("BBQ Pork Bowl", 9.55, "Food", "Slices of marinated pork served on top of white rice", "@drawable/asian_bbq_pork_bowl");
 		ds.addMenuItem("Korean Beef Taco", 3.25, "Food", "Kobe beef topped with melted blue cheese", "@drawable/korean_beef_taco");
