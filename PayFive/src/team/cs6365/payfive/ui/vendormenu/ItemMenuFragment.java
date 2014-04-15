@@ -48,7 +48,7 @@ public class ItemMenuFragment extends Fragment {
 	private static final int MENU_EDIT = 2;
 	private static final int REQUEST_PICTURE = 0;
 	private ListView listview;
-	private MenuItemArrayAdapter adapter;
+	private AdminMenuArrayAdapter adapter;
 	private ArrayList<Item> items;
 	private Activity ctx;
 	private String picPath;
@@ -71,7 +71,7 @@ public class ItemMenuFragment extends Fragment {
 
 		items = new ArrayList<Item>();
 
-		adapter = new MenuItemArrayAdapter(ctx, items);
+		adapter = new AdminMenuArrayAdapter(ctx, items);
 		listview.setAdapter(adapter);
 
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -271,7 +271,7 @@ public class ItemMenuFragment extends Fragment {
 	private void refreshListview() {
 		getAllItemsFromDB();
 		adapter.notifyDataSetChanged();
-		adapter = new MenuItemArrayAdapter(ctx, items);
+		adapter = new AdminMenuArrayAdapter(ctx, items);
 		listview.setAdapter(adapter);
 	}
 

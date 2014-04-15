@@ -27,7 +27,7 @@ public class CustomerViewFragment extends Fragment {
 
 	private static final String TAG = "***CUSTOMER";
 	private ListView listview;
-	private MenuItemArrayAdapter adapter;
+	private CustomerMenuArrayAdapter adapter;
 	private ArrayList<Item> items;
 	private Activity ctx;
 
@@ -46,7 +46,8 @@ public class CustomerViewFragment extends Fragment {
 
 		items = new ArrayList<Item>();
 
-		adapter = new MenuItemArrayAdapter(ctx, items);
+		//adapter = new MenuItemArrayAdapter(ctx, items);
+		adapter = new CustomerMenuArrayAdapter(ctx, items);
 		listview.setAdapter(adapter);
 
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,7 +89,7 @@ public class CustomerViewFragment extends Fragment {
 	private void refreshListview() {
 		getAllVisibleItemsFromDB();
 		adapter.notifyDataSetChanged();
-		adapter = new MenuItemArrayAdapter(ctx, items);
+		adapter = new CustomerMenuArrayAdapter(ctx, items);
 		listview.setAdapter(adapter);
 	}
 
