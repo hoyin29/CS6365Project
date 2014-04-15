@@ -165,6 +165,14 @@ public class MenuItemDataSource {
 		cur.close();
 		return mis;
 	}
+	
+	public int size() {
+		Cursor cur = db.query(MenuItemDatabaseContract.TABLE_NAME, columns,
+				null, null, null, null, null);
+		int s = cur.getCount();
+		cur.close();
+		return s;
+	}
 
 	public ArrayList<Item> getAllVisibleMenuItemsOnly() {
 		ArrayList<Item> mis = new ArrayList<Item>();

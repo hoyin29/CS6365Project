@@ -56,6 +56,7 @@ public class Resizer {
             }
         }
  
-        return bitmap;
+        return Bitmap.createScaledBitmap(bitmap, WIDTH, HEIGHT, false);
+        //return bitmap;
     }
 }

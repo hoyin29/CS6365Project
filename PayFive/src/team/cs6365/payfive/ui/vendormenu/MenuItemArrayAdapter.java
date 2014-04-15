@@ -138,7 +138,15 @@ public class MenuItemArrayAdapter extends ArrayAdapter<Item> {
 
 			Log.d(TAG, "picPath: " + i.getThumbnail());
 			
-			vh.pic.setImageBitmap(Resizer.resizeImage(i.getThumbnail()));
+			if(i.getThumbnail().contains("@drawable")) {
+				int imageResource = context.getResources().getIdentifier(i.getThumbnail(), null, context.getPackageName());
+				Drawable res = context.getResources().getDrawable(imageResource);
+				vh.pic.setImageDrawable(res);
+			} else {
+				vh.pic.setImageBitmap(Resizer.resizeImage(i.getThumbnail()));
+			}
+				
+			//vh.pic.setImageBitmap(Resizer.resizeImage(i.getThumbnail()));
 			
 			//vh.pic.setImageURI(Uri.parse(i.getThumbnail()));  // this works
 			
