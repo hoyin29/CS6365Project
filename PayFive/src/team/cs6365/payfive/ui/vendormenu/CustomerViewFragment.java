@@ -78,7 +78,7 @@ public class CustomerViewFragment extends Fragment {
 		MenuItemDataSource ds = new MenuItemDataSource(ctx);
 		ds.open();
 		items = ds.getAllVisibleMenuItemsOnly();
-		Toast.makeText(ctx, "retrieved " + items.size() + " items from DB",
+		Toast.makeText(ctx, "Loaded " + items.size() + " items.",
 				Toast.LENGTH_LONG).show();
 		Log.d(TAG, "closing db");
 		ds.close();

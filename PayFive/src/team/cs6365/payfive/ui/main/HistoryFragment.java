@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 
 /**
@@ -40,23 +41,36 @@ public class HistoryFragment extends Fragment {
 		"public grocery cost split",
 		"sushi at lunch with friends",
 		"bar bill",
-		"Bento food truck bill",
+		"Yobi food truck bill",
 		"chinese food night!!!",
 		"new korean restaurant dinner!!"
 	};
 	
 	private String[] send = {
-		"Sehoon",
-		"Hoyin",
-		"Kelly",
-		"Emily"
+		"Sehoon Shon",
+		"Hoyin Pun",
+		"Kelly Anderson",
+		"Emily Davis",
+		"Andrew Jones"
 	};
 	
 	private String[] recv = {
-		"Jin",	
-		"David",
-		"Bryan",
-		"Rachel"
+		"Jinhyun Kim",	
+		"David Roe",
+		"Bryan Chan",
+		"Aaron Roberts",
+		"Rachel Li"
+	};
+	
+	private String[] time = {
+		"2014-03-23 14:23:12",
+		"2014-01-04 11:32:05",
+		"2014-02-12 08:43:08",
+		"2014-01-17 14:22:22",
+		"2014-04-10 02:04:29",
+		"2014-04-11 07:11:21",
+		"2014-02-18 21:20:19",
+		"2014-03-18 03:23:23"
 	};
 	
 	@Override
@@ -130,23 +144,40 @@ public class HistoryFragment extends Fragment {
 	private void createTransactions(int n) {
 		TransactionDataSource tds = new TransactionDataSource(act);
 		tds.open();
-		tds.drop();
-		tds.create();
-		Random r = new Random();
-		for (int i = 0; i < n; ++i) {
-			List<Item> l = new ArrayList<Item>();
-			l.add(new Item("item" + i, r.nextDouble() * 10 + 1, "category" + i,
-					"description" + i, ""));
-			// Log.d(TAG, "size: " + l.size());
-			// Log.d(TAG, "before: " + l.get(0).getName());
-			Transaction t = new Transaction(i, l, new User(recv[r.nextInt(recv.length)], "123"),
-					new User(send[r.nextInt(send.length)], "456"), r.nextDouble() * 10 + 10, "",
-					desc[r.nextInt(desc.length)], r.nextBoolean());
-			// Log.d(TAG, "after: " + t.getItems().get(0).getName());
-			tds.addTransaction(t);
+		
+		//tds.drop();
+		//tds.create();
+		
+		if(tds.size() == 0) {
+			Random r = new Random();
+			int rc = 0, sc = 0;
+			for (int i = 0; i < n; ++i) {
+				List<Item> l = new ArrayList<Item>();
+				l.add(new Item("item" + i, r.nextDouble() * 10 + 1, "category" + i,
+						"description" + i, ""));
+				// Log.d(TAG, "size: " + l.size());
+				// Log.d(TAG, "before: " + l.get(0).getName());
+				
+				boolean type = r.nextBoolean();
+				if(type) ++sc;
+				else ++rc;
+				
+				if(sc == n/2) {
+					type = false;
+				} else if(rc == n/2){
+					type = true;
+				}
+					
+				Transaction t = new Transaction(i, l, new User(recv[r.nextInt(recv.length)], "123"),
+						new User(send[r.nextInt(send.length)], "456"), r.nextDouble() * 10 + 10,
+						time[r.nextInt(time.length)], desc[r.nextInt(desc.length)], type);
+				// Log.d(TAG, "after: " + t.getItems().get(0).getName());
+				tds.addTransaction(t);
+
+			}
 
 		}
-
+		
 		list = tds.getAllTransactions();
 		tds.close();
 	}

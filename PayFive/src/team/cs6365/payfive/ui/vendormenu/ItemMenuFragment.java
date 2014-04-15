@@ -226,8 +226,7 @@ public class ItemMenuFragment extends Fragment {
 		MenuItemDataSource ds = new MenuItemDataSource(ctx);
 		ds.open();
 		items = ds.getAllMenuItems();
-		Toast.makeText(ctx, "retrieved " + items.size() + " items from DB",
-				Toast.LENGTH_LONG).show();
+		Toast.makeText(ctx, "Loaded all " + items.size() + " items.", Toast.LENGTH_LONG).show();
 		Log.d(TAG, "closing db");
 		ds.close();
 		Log.d(TAG, "notify adapter after getting all items from db");

@@ -140,6 +140,15 @@ public class TransactionDataSource
 		return ts;
 	}
 	
+	public int size() {
+		Cursor cur = db.query(TransactionDatabaseContract.TABLE_NAME, columns,
+				null, null, null, null, null);
+		int s = cur.getCount();
+		cur.close();
+		return s;
+	}
+
+	
 	public Transaction cursorToTransaction(Cursor cur)
 	{
 		Log.d(TAG, "column count: " + cur.getColumnCount());
