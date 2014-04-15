@@ -66,6 +66,8 @@ public class ItemMenuFragment extends Fragment {
 		ivPic = null;
 
 		listview = (ListView) rootView.findViewById(R.id.listview);
+		listview.setEmptyView(rootView.findViewById(android.R.id.empty));
+
 		items = new ArrayList<Item>();
 
 		adapter = new MenuItemArrayAdapter(ctx, items);
@@ -83,7 +85,7 @@ public class ItemMenuFragment extends Fragment {
 			}
 		});
 
-		//addItemsToDB(20);
+		// addItemsToDB(20);
 		refreshListview();
 		registerForContextMenu(listview);
 		Log.d(TAG, "done with onCreate()");
@@ -179,23 +181,29 @@ public class ItemMenuFragment extends Fragment {
 		ds.drop();
 		ds.create();
 		Random r = new Random();
-		
+
 		/*
-		for (int i = 0; i < n; ++i) {
-			Log.d(TAG, "adding item" + i);
-			ds.addMenuItem("item" + i, r.nextDouble() * 10 + 1, "category" + i,
-					"description" + i, "");
-		}
-		*/
-		
+		 * for (int i = 0; i < n; ++i) { Log.d(TAG, "adding item" + i);
+		 * ds.addMenuItem("item" + i, r.nextDouble() * 10 + 1, "category" + i,
+		 * "description" + i, ""); }
+		 */
+
 		/*
-		ds.addMenuItem("BBQ Pork Bowl", 9.55, "Food", "Slices of marinated pork served on top of white rice", "@drawable/asian_bbq_pork_bowl");
-		ds.addMenuItem("Korean Beef Taco", 3.25, "Food", "Kobe beef topped with melted blue cheese", "@drawable/korean_beef_taco");
-		ds.addMenuItem("Teriyaki Burger", 8.55, "Food", "Marinated chicken breast and self baked burger buns", "@drawable/grilled_chicken_burger");
-		ds.addMenuItem("Bacon Chili Fries", 6.35, "Food", "Honey grilled bacon with hot chili fries", "@drawable/bacon_chili_fries");
-		ds.addMenuItem("Lobster Roll", 12.75, "Food", "Maine lobster tail meat with cheddar sauce", "@drawable/lobster_roll");
-		ds.addMenuItem("Melon Bubble Tea", 4.25, "Food", "Real diced watermelon with traditional bubble tea", "@drawable/melon_bubble_tea");
-		*/
+		 * ds.addMenuItem("BBQ Pork Bowl", 9.55, "Food",
+		 * "Slices of marinated pork served on top of white rice",
+		 * "@drawable/asian_bbq_pork_bowl"); ds.addMenuItem("Korean Beef Taco",
+		 * 3.25, "Food", "Kobe beef topped with melted blue cheese",
+		 * "@drawable/korean_beef_taco"); ds.addMenuItem("Teriyaki Burger",
+		 * 8.55, "Food", "Marinated chicken breast and self baked burger buns",
+		 * "@drawable/grilled_chicken_burger");
+		 * ds.addMenuItem("Bacon Chili Fries", 6.35, "Food",
+		 * "Honey grilled bacon with hot chili fries",
+		 * "@drawable/bacon_chili_fries"); ds.addMenuItem("Lobster Roll", 12.75,
+		 * "Food", "Maine lobster tail meat with cheddar sauce",
+		 * "@drawable/lobster_roll"); ds.addMenuItem("Melon Bubble Tea", 4.25,
+		 * "Food", "Real diced watermelon with traditional bubble tea",
+		 * "@drawable/melon_bubble_tea");
+		 */
 		ds.close();
 	}
 
@@ -230,9 +238,9 @@ public class ItemMenuFragment extends Fragment {
 
 	private void actionBarCustomerView() {
 		Fragment customerViewFragment = new CustomerViewFragment();
-		//Bundle bundle = new Bundle();
-		//bundle.putBoolean("CUSTOMER", true);
-		//customerViewFragment.setArguments(bundle);
+		// Bundle bundle = new Bundle();
+		// bundle.putBoolean("CUSTOMER", true);
+		// customerViewFragment.setArguments(bundle);
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager.beginTransaction()
 				.replace(R.id.content_frame, customerViewFragment).commit();
@@ -324,16 +332,18 @@ public class ItemMenuFragment extends Fragment {
 					R.drawable.placeholder));
 		} else {
 			Log.d(TAG, "picPath is not empty - thumbnail");
-			
+
 			ivPic.setImageBitmap(Resizer.resizeImage(curr.getThumbnail()));
-			
-			//ivPic.setImageURI(Uri.parse(curr.getThumbnail()));  // this work
-			
+
+			// ivPic.setImageURI(Uri.parse(curr.getThumbnail())); // this work
+
 			/*
-			int imageResource = ctx.getResources().getIdentifier(curr.getThumbnail(), null, ctx.getPackageName());
-			Drawable res = ctx.getResources().getDrawable(imageResource);
-			ivPic.setImageDrawable(res);
-			*/
+			 * int imageResource =
+			 * ctx.getResources().getIdentifier(curr.getThumbnail(), null,
+			 * ctx.getPackageName()); Drawable res =
+			 * ctx.getResources().getDrawable(imageResource);
+			 * ivPic.setImageDrawable(res);
+			 */
 		}
 
 		// ivPic.setImageBitmap(BitmapFactory.decodeFile(picPath));
@@ -388,17 +398,20 @@ public class ItemMenuFragment extends Fragment {
 						R.drawable.placeholder));
 			} else {
 				Log.d(TAG, "picPath is not empty - thumbnail");
-				
+
 				ivPic.setImageBitmap(Resizer.resizeImage(curr.getThumbnail()));
-				
-				//ivPic.setImageURI(Uri.parse(curr.getThumbnail())); // this work
+
+				// ivPic.setImageURI(Uri.parse(curr.getThumbnail())); // this
+				// work
 
 				/*
-				int imageResource = ctx.getResources().getIdentifier(curr.getThumbnail(), null, ctx.getPackageName());
-				Drawable res = ctx.getResources().getDrawable(imageResource);
-				ivPic.setImageDrawable(res);
-				*/
-				
+				 * int imageResource =
+				 * ctx.getResources().getIdentifier(curr.getThumbnail(), null,
+				 * ctx.getPackageName()); Drawable res =
+				 * ctx.getResources().getDrawable(imageResource);
+				 * ivPic.setImageDrawable(res);
+				 */
+
 				lp = ivPic.getLayoutParams();
 				lp.width = 300;
 				lp.height = 300;
