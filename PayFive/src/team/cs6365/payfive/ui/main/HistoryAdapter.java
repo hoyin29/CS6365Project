@@ -5,7 +5,6 @@ import java.util.List;
 
 import team.cs6365.payfive.PayFive;
 import team.cs6365.payfive.R;
-import team.cs6365.payfive.model.Item;
 import team.cs6365.payfive.model.Transaction;
 
 import android.content.Context;
@@ -13,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
